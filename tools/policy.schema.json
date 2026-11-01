@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "better_cooking:culinary_policy.v1",
+  "title": "V3 locked wire shape: keyed food/source-route maps; nested replacement",
+  "type": "object",
+  "required": ["schema", "version", "qualification", "provenance", "defaults", "aliases", "foods", "servings", "routes", "gaps"],
+  "properties": {
+    "schema": {"const": "better_cooking:culinary_policy.v1"},
+    "version": {"const": 1},
+    "qualification": {"const": "unqualified", "description": "Initial v2 has NO NativeAcceptance authority, including vacuous empty graphs."},
+    "provenance": {"type": "object"},
+    "native_observation_partition": {"$ref": "#/$defs/nativePartition"},
+    "native_observation_provenance": {"type": "object"},
+    "defaults": {"type": "object"},
+    "aliases": {"type": "object", "additionalProperties": {"type": "string"}},
+    "foods": {"type": "object", "additionalProperties": {"$ref": "#/$defs/food"}},
+    "servings": {"type": "object"},
+    "nonstandard_consumables": {"type": "object", "description": "Explicit source-only nonedible native DRINK records; never assert FoodProperties/getter zeros or connected completion."},
+    "routes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/route"}},
+    "gaps": {"type": "array"}
+  },
+  "allOf": [{"if": {"required": ["native_observation_partition"]}, "then": {"required": ["native_observation_provenance", "native_unresolved_recipe_ids"], "properties": {"routes": {"maxProperties": 0}}}}],
+  "$defs": {
+    "nativePartition": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema","raw_sha256","raw_bytes","binding_sha256","contract_sha256","invocation_nonce","source_baseline_sha256","recipe_count","ledger","admitted_recipe_ids","quarantined_recipe_ids","source_recipe_ids","source_only_unobserved_recipe_ids","backend_authority","qualification"],
+      "properties": {
+        "schema": {"const":"better_cooking:native_observation_partition.v2"},
+        "raw_sha256": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "raw_bytes": {"type":"integer","minimum":0,"maximum":67108864},
+        "binding_sha256": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "contract_sha256": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "invocation_nonce": {"type":"string"},
+        "source_baseline_sha256": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "recipe_count": {"type":"integer","minimum":0},
+        "ledger": {"type":"array","items":{"type":"object","additionalProperties":false,"required":["ordinal","id","type_ref","serializer_ref","classification","reasons"],"properties":{"ordinal":{"type":"integer","minimum":0},"id":{"type":"string"},"type_ref":{"type":["string","null"]},"serializer_ref":{"type":["string","null"]},"classification":{"const":"quarantined"},"reasons":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"},"contains":{"const":"backend_contract_not_approved"}}}}},
+        "admitted_recipe_ids": {"type":"array","maxItems":0},
+        "quarantined_recipe_ids": {"type":"array","uniqueItems":true,"items":{"type":"string"}},
+        "source_recipe_ids": {"type":"array","uniqueItems":true,"items":{"type":"string"}},
+        "source_only_unobserved_recipe_ids": {"type":"array","uniqueItems":true,"items":{"type":"string"}},
+        "backend_authority": {"const":"empty_pending_exact_contracts"},
+        "qualification": {"const":false}
+      }
+    },
+    "unknownNumber": {"type": ["number", "null"]},
+    "edge": {
+      "type": "object", "required": ["kind", "id", "count"],
+      "properties": {"kind": {"enum": ["item", "tag"]}, "id": {"type": "string"}, "count": {"type": "number", "exclusiveMinimum": 0}}
+    },
+    "nativeQuality": {
+      "type": "object", "required": ["mode", "inheritance"],
+      "properties": {
+        "mode": {"enum": ["fixed_standard_unless_inherited_preparation", "retained_seeded_flexible_evaluator"]},
+        "source_recipe_id": {"type": "string"}, "source_recipe_type": {"type": "string"},
+        "seed_source": {"const": "actual_runtime_world_seed"}, "input_basis": {"const": "actual_paid_counted_inputs"},
+        "inheritance": {"const": "worst_inherited_no_reroll_or_compound"}
+      }
+    },
+    "food": {
+      "type": "object",
+      "required": ["role", "canonical", "work_class", "servings", "nutrition", "moisture", "effects", "quality", "quantity_basis", "evidence", "unresolved"],
+      "properties": {
+        "role": {"enum": ["ingredient", "staple", "meal", "drink", "special", "unresolved"]},
+        "canonical": {"type": "string"},
+        "quantity_basis": {"enum": ["per_portion", "native_intake", "paid_beverage"]},
+        "serving_metadata": {"type": "object"},
+        "native_food_properties": {"type": ["object", "null"]},
+        "nonstandard_consumable": {"type": "object"},
+        "composite_moisture": {"type": "object", "required": ["basis", "mode", "direct_override", "process_retention", "added_water_mb", "quality_scales_water", "status"], "properties": {"basis": {"const": "per_edible_portion"}, "mode": {"enum": ["direct_override", "derive_actual_paid_inputs"]}, "direct_override": {"type": ["object", "null"]}, "process_retention": {"$ref": "#/$defs/unknownNumber"}, "added_water_mb": {"$ref": "#/$defs/unknownNumber"}, "quality_scales_water": {"const": false}, "status": {"type": "string"}}},
+        "authored_review": {"type": "object", "required": ["reason", "evidence"]},
+        "work_class": {"enum": ["none", "straightforward", "substantial", "elaborate", "unresolved"]},
+        "servings": {"type": "integer", "minimum": 1},
+        "nutrition": {
+          "type": "object", "required": ["hunger", "saturation_modifier", "nutrients"],
+          "properties": {"hunger": {"$ref": "#/$defs/unknownNumber"}, "saturation_modifier": {"$ref": "#/$defs/unknownNumber"}, "nutrients": {"type": "object"}}
+        },
+        "moisture": {
+          "type": "object", "required": ["hydration", "quenching"],
+          "properties": {"hydration": {"$ref": "#/$defs/unknownNumber"}, "quenching": {"$ref": "#/$defs/unknownNumber"}}
+        },
+        "effects": {"type": "array"}, "quality": {"enum": ["fixed_standard", "carry_preparation"]},
+        "evidence": {"type": "array"}, "unresolved": {"type": "array"}
+      }
+    },
+    "replacement": {
+      "type": ["object", "null"],
+      "required": ["id", "surface", "input_groups", "output", "servings", "work_class", "stages", "cook_ticks", "native_quality"],
+      "properties": {
+        "native_quality": {"$ref": "#/$defs/nativeQuality"},
+        "id": {"type": "string"},
+        "surface": {"enum": ["board", "pot", "stockpot", "steamer", "baking_mat", "baking", "roasting", "teapot"]},
+        "finish": {"enum": [null, "board", "pot", "stockpot", "steamer", "baking", "roasting", "teapot"]},
+        "preparation_surface": {"enum": [null, "board", "baking_mat"]},
+        "input_groups": {"type": "array", "items": {"type": "array", "items": {"$ref": "#/$defs/edge"}}},
+        "output": {"type": "object", "required": ["id", "count"], "properties": {"id": {"type": "string"}, "count": {"type": "integer", "minimum": 1}}},
+        "servings": {"type": "integer", "minimum": 1}, "work_class": {"type": "string"},
+        "stages": {"type": "array", "items": {"type": "object", "required": ["action", "duration_ticks", "repetitions", "tool_tag"], "properties": {"action": {"enum": ["cut", "mix", "knead", "roll", "assemble", "stir"]}, "duration_ticks": {"type": "integer", "minimum": 1, "maximum": 1200}, "repetitions": {"type": "integer", "minimum": 1, "maximum": 64}, "tool_tag": {"type": "string"}}}},
+        "cook_ticks": {"type": "integer", "minimum": 1}
+      }
+    },
+    "route": {
+      "type": "object", "required": ["source_id", "disposition", "inputs", "outputs", "origin_gates", "replacement", "native_quality", "evidence", "unresolved"],
+      "properties": {
+        "native_quality": {"$ref": "#/$defs/nativeQuality"},
+        "source_id": {"type": "string"},
+        "authored_review": {"type": "object", "required": ["reason", "evidence"]},
+        "disposition": {"enum": ["replace", "retain_bulk", "retain_special", "retain_nonfood", "retain_distinct_apparatus", "deferred", "unresolved"]},
+        "inputs": {"type": "array"}, "outputs": {"type": "array"},
+        "origin_gates": {"type": "array"}, "replacement": {"$ref": "#/$defs/replacement"},
+        "evidence": {"type": "array"}, "unresolved": {"type": "array"}
+      }
+    }
+  }
+}

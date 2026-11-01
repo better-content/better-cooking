@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "better_cooking:nonstandard_consumables.v1",
+  "title": "Explicit source non-FoodProperties native whole drinks; NOT native acceptance",
+  "type": "object",
+  "required": ["schema", "source_inputs", "consumables"],
+  "properties": {
+    "schema": {"const": "better_cooking:nonstandard_consumables.v1"},
+    "source_inputs": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string"}},
+    "ingredient_inputs": {"type": "object", "required": ["exact_item_ids", "live_item_tags", "source_tag_candidates_are_not_live_membership"], "properties": {
+      "exact_item_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+      "live_item_tags": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+      "source_tag_candidates": {"type": "object"}, "source_tag_candidates_are_not_live_membership": {"const": true}
+    }},
+    "consumables": {"type": "object", "additionalProperties": {"$ref": "#/$defs/sourceConsumable"}}
+  },
+  "$defs": {
+    "sourceConsumable": {
+      "type": "object",
+      "required": ["id", "kind", "item_class", "is_edible", "food_properties", "use_animation", "use_duration_ticks", "remainder", "source_finish_food_mutation", "source_selected_effects", "evidence"],
+      "properties": {
+        "id": {"type": "string"}, "kind": {"const": "native_whole_drink"},
+        "item_class": {"type": "string"}, "is_edible": {"const": false}, "food_properties": {"type": "null"},
+        "use_animation": {"const": "drink"}, "use_duration_ticks": {"const": 32}, "remainder": {"type": "string"},
+        "source_finish_food_mutation": {"type": "object", "required": ["kind", "normalized_target"], "properties": {"kind": {"const": "none"}, "normalized_target": {"const": {"hunger": 0, "saturation_modifier": 0}}}},
+        "source_selected_effects": {"type": "array"}, "source_production": {"type": "object"},
+        "legacy_balance_fallback": {"type": "object", "required": ["hydration", "quenching", "authorization", "basis", "invalid_or_unpaid_new_receipt_must_not_fallback", "unknown_nutrition_not_zero"], "properties": {"hydration": {"type": "number", "minimum": 0}, "quenching": {"type": "number", "minimum": 0}, "invalid_or_unpaid_new_receipt_must_not_fallback": {"const": true}, "unknown_nutrition_not_zero": {"const": true}}},
+        "hydration": {"type": ["number", "null"]}, "quenching": {"type": ["number", "null"]},
+        "evidence": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+      }
+    },
+    "nativeGetterRow": {
+      "description": "Optional native_catalogue.v1 native_consumables ARRAY entries. Getter discovery does not prove completed/debited intake. Remainder may be source-only and MUST retain its basis.",
+      "type": "object", "required": ["id", "item_class", "is_edible", "food_properties", "use_animation", "use_duration_ticks", "remainder"],
+      "properties": {
+        "id": {"type": "string"}, "item_class": {"type": "string"}, "is_edible": {"type": "boolean"}, "food_properties": {"type": ["object", "null"]},
+        "use_animation": {"type": "string"}, "use_duration_ticks": {"type": "integer"}, "remainder": {"type": "string"},
+        "nutrients": {"type": ["object", "null"], "description": "Absent/null unavailable; explicit {} is a genuinely observed empty map."},
+        "sugar": {"type": ["number", "null"]}, "alcohol": {"type": ["number", "null"]}, "spice": {"type": ["number", "null"]},
+        "native_effect_declarations": {"type": "array", "description": "Registry declarations, NOT selected or awarded effects."},
+        "source_only": {"type": "object"}, "gaps": {"type": "object"}
+      }
+    }
+  }
+}

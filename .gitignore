@@ -1,0 +1,11 @@
+/.gradle/
+/build/
+/run/
+/.runtime/
+/.venv/
+*.log
+__pycache__/
+/native-evidence/
+/logs/
+/tools/reports/
+/tools/authored/review-drafts/

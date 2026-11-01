@@ -1,0 +1,374 @@
+{
+  "canonical_authority_source": "/home/dev/mod_source/better-bumblezone-crops/src/main/resources/defaults/cultivars.json",
+  "data_overrides": [
+    {
+      "changes": [
+        {
+          "from": "kaleidoscope_cookery:tomato",
+          "to": "farmersdelight:tomato"
+        },
+        {
+          "from": "kaleidoscope_cookery:tomato_seed",
+          "to": "farmersdelight:tomato_seeds"
+        },
+        {
+          "from": "kaleidoscope_cookery:tomato_seed",
+          "to": "farmersdelight:tomato_seeds"
+        }
+      ],
+      "output": "/home/dev/better-content-modpack/kubejs/data/kaleidoscope_cookery/loot_tables/blocks/tomato_crop.json",
+      "resource": "data/kaleidoscope_cookery/loot_tables/blocks/tomato_crop.json",
+      "rule": "only_item_name_leaves_changed",
+      "source_sha256": "d31c1670303fccf99b6e48b8c378eb7fb096ca41fc2c67117cd89855449a773f"
+    },
+    {
+      "changes": [
+        {
+          "from": "kaleidoscope_cookery:lettuce",
+          "to": "farmersdelight:cabbage"
+        },
+        {
+          "from": "kaleidoscope_cookery:lettuce_seed",
+          "to": "farmersdelight:cabbage_seeds"
+        },
+        {
+          "from": "kaleidoscope_cookery:lettuce_seed",
+          "to": "farmersdelight:cabbage_seeds"
+        }
+      ],
+      "output": "/home/dev/better-content-modpack/kubejs/data/kaleidoscope_cookery/loot_tables/blocks/lettuce_crop.json",
+      "resource": "data/kaleidoscope_cookery/loot_tables/blocks/lettuce_crop.json",
+      "rule": "only_item_name_leaves_changed",
+      "source_sha256": "cbd92a70c317bebc363a9a250b626b106c5a291aeeed9b75dbcc370deb5e38c9"
+    },
+    {
+      "changes": [
+        {
+          "from": "kaleidoscope_cookery:rice_panicle",
+          "to": "farmersdelight:rice_panicle"
+        },
+        {
+          "from": "kaleidoscope_cookery:wild_rice",
+          "to": "better_bumblezone_crops:farmersdelight_rice_seeds"
+        },
+        {
+          "from": "kaleidoscope_cookery:wild_rice",
+          "to": "better_bumblezone_crops:farmersdelight_rice_seeds"
+        }
+      ],
+      "output": "/home/dev/better-content-modpack/kubejs/data/kaleidoscope_cookery/loot_tables/blocks/rice_crop.json",
+      "resource": "data/kaleidoscope_cookery/loot_tables/blocks/rice_crop.json",
+      "rule": "only_item_name_leaves_changed",
+      "source_sha256": "22f552d11b431e9872acb3733291824165a89b935ab6c3272cf3711702036df2"
+    },
+    {
+      "changes": [
+        {
+          "from": "kaleidoscope_cookery:tomato_seed",
+          "to": "farmersdelight:tomato_seeds"
+        },
+        {
+          "from": "kaleidoscope_cookery:lettuce_seed",
+          "to": "farmersdelight:cabbage_seeds"
+        },
+        {
+          "from": "kaleidoscope_cookery:wild_rice",
+          "to": "better_bumblezone_crops:farmersdelight_rice_seeds"
+        }
+      ],
+      "output": "/home/dev/better-content-modpack/kubejs/data/kaleidoscope_cookery/loot_tables/straw_hat_seed_drop.json",
+      "resource": "data/kaleidoscope_cookery/loot_tables/straw_hat_seed_drop.json",
+      "rule": "only_item_name_leaves_changed",
+      "source_sha256": "4ae6bd64a38c91134edfacbc7c4a75c5a680f2da99b7a884db260f70029b1109"
+    },
+    {
+      "changes": [
+        {
+          "from": "kaleidoscope_cookery:tomato",
+          "to": "farmersdelight:tomato"
+        },
+        {
+          "from": "kaleidoscope_cookery:tomato_seed",
+          "to": "farmersdelight:tomato_seeds"
+        },
+        {
+          "from": "kaleidoscope_cookery:lettuce_seed",
+          "to": "farmersdelight:cabbage_seeds"
+        },
+        {
+          "from": "kaleidoscope_cookery:wild_rice",
+          "to": "better_bumblezone_crops:farmersdelight_rice_seeds"
+        },
+        {
+          "from": "kaleidoscope_cookery:rice_panicle",
+          "to": "farmersdelight:rice_panicle"
+        }
+      ],
+      "output": "/home/dev/better-content-modpack/kubejs/data/kaleidoscope_cookery/loot_tables/chest/village_chest.json",
+      "resource": "data/kaleidoscope_cookery/loot_tables/chest/village_chest.json",
+      "rule": "only_item_name_leaves_changed",
+      "source_sha256": "72f205414177baa2fc074dfb2183d77540d8c603ead0646ebf9094b294a9a3f6"
+    },
+    {
+      "changes": [
+        {
+          "from": "kaleidoscope_cookery:tomato_seed",
+          "to": "farmersdelight:tomato_seeds"
+        }
+      ],
+      "output": "/home/dev/better-content-modpack/kubejs/data/kaleidoscope_cookery/recipes/tomato_seed.json",
+      "resource": "data/kaleidoscope_cookery/recipes/tomato_seed.json",
+      "rule": "same_count_canonical_output_then_existing_21_seed_recipe_gate",
+      "source_sha256": "dbea1d5f6c4fc4cf0761d619e05514904b9dc13498e3c6e35a9c02ad5de50a42"
+    },
+    {
+      "changes": [],
+      "output": null,
+      "resource": "data/kaleidoscope_cookery/structures/village/houses/desert_kitchen.nbt",
+      "rule": "inspected_no_duplicate_cultivar_palette_no_override",
+      "source_sha256": "e1ef8db86682c1aae5b08c317d7f10dff3a45570d8f8c80d4a0e6fe91b3fde85"
+    },
+    {
+      "changes": [
+        {
+          "entry": 13,
+          "from": "kaleidoscope_cookery:tomato_crop",
+          "palette": 0,
+          "removed_incompatible_properties": {
+            "age": "7"
+          },
+          "to": "farmersdelight:wild_tomatoes"
+        }
+      ],
+      "output": "/home/dev/better-content-modpack/kubejs/data/kaleidoscope_cookery/structures/village/houses/plains_kitchen.nbt",
+      "resource": "data/kaleidoscope_cookery/structures/village/houses/plains_kitchen.nbt",
+      "rule": "only_new_template_tomato_palette_to_canonical_finite_wild_forage",
+      "source_sha256": "ddca3c5a30a77379c231373af9cc0cee10efe17b897bbb94fdf419e60ccc13f5"
+    },
+    {
+      "changes": [
+        {
+          "entry": 13,
+          "from": "kaleidoscope_cookery:tomato_crop",
+          "palette": 0,
+          "removed_incompatible_properties": {
+            "age": "7"
+          },
+          "to": "farmersdelight:wild_tomatoes"
+        }
+      ],
+      "output": "/home/dev/better-content-modpack/kubejs/data/kaleidoscope_cookery/structures/village/houses/savanna_kitchen.nbt",
+      "resource": "data/kaleidoscope_cookery/structures/village/houses/savanna_kitchen.nbt",
+      "rule": "only_new_template_tomato_palette_to_canonical_finite_wild_forage",
+      "source_sha256": "abe8791c813e7cae34e9c2ef32666b111252f39a64198b96845df0343cddf7c7"
+    },
+    {
+      "changes": [],
+      "output": null,
+      "resource": "data/kaleidoscope_cookery/structures/village/houses/snowy_kitchen.nbt",
+      "rule": "inspected_no_duplicate_cultivar_palette_no_override",
+      "source_sha256": "f7f14b7099d58e12ce4b9a956d07ee3b926d9771213eb89de50ec1c7684a0d2e"
+    },
+    {
+      "changes": [
+        {
+          "entry": 19,
+          "from": "kaleidoscope_cookery:tomato_crop",
+          "palette": 0,
+          "removed_incompatible_properties": {
+            "age": "7"
+          },
+          "to": "farmersdelight:wild_tomatoes"
+        }
+      ],
+      "output": "/home/dev/better-content-modpack/kubejs/data/kaleidoscope_cookery/structures/village/houses/taiga_kitchen.nbt",
+      "resource": "data/kaleidoscope_cookery/structures/village/houses/taiga_kitchen.nbt",
+      "rule": "only_new_template_tomato_palette_to_canonical_finite_wild_forage",
+      "source_sha256": "633f05d20a864946dae8a781372544b1fc504ad67ac0719bdf6c7869b4b6baf1"
+    },
+    {
+      "changes": [
+        {
+          "input": "farmersdelight:wild_tomatoes",
+          "output": "kaleidoscope_cookery:chili_crop",
+          "probability": 0.33
+        },
+        {
+          "input": "farmersdelight:wild_tomatoes",
+          "output": "farmersdelight:wild_cabbages",
+          "probability": 0.33
+        }
+      ],
+      "output": "/home/dev/better-content-modpack/kubejs/data/kaleidoscope_cookery/worldgen/processor_list/crop_replace.json",
+      "resource": "data/kaleidoscope_cookery/worldgen/processor_list/crop_replace.json",
+      "rule": "canonical_finite_wild_forage_preserve_distinct_chili_and_exact_probabilities",
+      "source_sha256": "7220cbce34b46a252955ffa9c420ba021d80d86c02d4f020960dad2d4506e34e"
+    }
+  ],
+  "harvest_redirects": {
+    "kaleidoscope_cookery:lettuce": {
+      "evidence": [
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/init/ModItems.java",
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/block/crop/BaseCropBlock.java",
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/block/misc/StrawBlocks.java"
+      ],
+      "reason": "Canonical NEW crop acquisition output only; retain physical output count and leave all old inventory stacks registered and unchanged. Panicle/wild-rice are acquisition identities, NOT 1:1 ingredient equivalences.",
+      "scope": "new_native_harvest_output_only",
+      "source_count_multiplier": 1,
+      "status": "authored_pending_native",
+      "target": "farmersdelight:cabbage"
+    },
+    "kaleidoscope_cookery:lettuce_seed": {
+      "evidence": [
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/init/ModItems.java",
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/block/crop/BaseCropBlock.java",
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/block/misc/StrawBlocks.java"
+      ],
+      "reason": "Canonical NEW crop acquisition output only; retain physical output count and leave all old inventory stacks registered and unchanged. Panicle/wild-rice are acquisition identities, NOT 1:1 ingredient equivalences.",
+      "scope": "new_native_harvest_output_only",
+      "source_count_multiplier": 1,
+      "status": "authored_pending_native",
+      "target": "farmersdelight:cabbage_seeds"
+    },
+    "kaleidoscope_cookery:rice": {
+      "evidence": [
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/init/ModItems.java",
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/block/crop/BaseCropBlock.java",
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/block/misc/StrawBlocks.java"
+      ],
+      "reason": "Canonical NEW crop acquisition output only; retain physical output count and leave all old inventory stacks registered and unchanged. Panicle/wild-rice are acquisition identities, NOT 1:1 ingredient equivalences.",
+      "scope": "new_native_harvest_output_only",
+      "source_count_multiplier": 1,
+      "status": "authored_pending_native",
+      "target": "farmersdelight:rice"
+    },
+    "kaleidoscope_cookery:rice_panicle": {
+      "evidence": [
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/init/ModItems.java",
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/block/crop/BaseCropBlock.java",
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/block/misc/StrawBlocks.java"
+      ],
+      "reason": "Canonical NEW crop acquisition output only; retain physical output count and leave all old inventory stacks registered and unchanged. Panicle/wild-rice are acquisition identities, NOT 1:1 ingredient equivalences.",
+      "scope": "new_native_harvest_output_only",
+      "source_count_multiplier": 1,
+      "status": "authored_pending_native",
+      "target": "farmersdelight:rice_panicle"
+    },
+    "kaleidoscope_cookery:tomato": {
+      "evidence": [
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/init/ModItems.java",
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/block/crop/BaseCropBlock.java",
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/block/misc/StrawBlocks.java"
+      ],
+      "reason": "Canonical NEW crop acquisition output only; retain physical output count and leave all old inventory stacks registered and unchanged. Panicle/wild-rice are acquisition identities, NOT 1:1 ingredient equivalences.",
+      "scope": "new_native_harvest_output_only",
+      "source_count_multiplier": 1,
+      "status": "authored_pending_native",
+      "target": "farmersdelight:tomato"
+    },
+    "kaleidoscope_cookery:tomato_seed": {
+      "evidence": [
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/init/ModItems.java",
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/block/crop/BaseCropBlock.java",
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/block/misc/StrawBlocks.java"
+      ],
+      "reason": "Canonical NEW crop acquisition output only; retain physical output count and leave all old inventory stacks registered and unchanged. Panicle/wild-rice are acquisition identities, NOT 1:1 ingredient equivalences.",
+      "scope": "new_native_harvest_output_only",
+      "source_count_multiplier": 1,
+      "status": "authored_pending_native",
+      "target": "farmersdelight:tomato_seeds"
+    },
+    "kaleidoscope_cookery:wild_rice": {
+      "evidence": [
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/init/ModItems.java",
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/block/crop/BaseCropBlock.java",
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/block/misc/StrawBlocks.java"
+      ],
+      "reason": "Canonical NEW crop acquisition output only; retain physical output count and leave all old inventory stacks registered and unchanged. Panicle/wild-rice are acquisition identities, NOT 1:1 ingredient equivalences.",
+      "scope": "new_native_harvest_output_only",
+      "source_count_multiplier": 1,
+      "status": "authored_pending_native",
+      "target": "better_bumblezone_crops:farmersdelight_rice_seeds"
+    }
+  },
+  "schema": "better_cooking:authored_acquisition.v1",
+  "source_jar": "/home/dev/.tmp/kaleidoscope-review/kaleidoscopecookery-1.6.0-forge+mc1.20.1.jar",
+  "source_jar_sha256": "0eee5579b36746825d6586c65051d9e68fc84178a19dec4372fc9d64b8629d62",
+  "status": "authored_pending_native",
+  "trade_input_compatibility": [
+    {
+      "canonical_input": "farmersdelight:tomato",
+      "canonical_offer": "requires_native_exact_compatibility_factory",
+      "evidence": [
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/event/ModTradesEvent.java#addNoviceTrades"
+      ],
+      "input_count": 12,
+      "legacy_input": "kaleidoscope_cookery:tomato",
+      "legacy_offer": "retain_for_finite_stock",
+      "level": 1,
+      "max_uses": 16,
+      "output": {
+        "count": 1,
+        "id": "minecraft:emerald"
+      },
+      "price_multiplier": 0.05,
+      "profession": "kaleidoscope_cookery:chef",
+      "reason": "Source-proven CHEF BUY offer, not a seed/meal sale. Keep old finite-stock purchase and add same-price canonical-input compatibility without deleting the profession.",
+      "villager_xp": 2
+    },
+    {
+      "canonical_input": "farmersdelight:cabbage",
+      "canonical_offer": "requires_native_exact_compatibility_factory",
+      "evidence": [
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/event/ModTradesEvent.java#addNoviceTrades"
+      ],
+      "input_count": 16,
+      "legacy_input": "kaleidoscope_cookery:lettuce",
+      "legacy_offer": "retain_for_finite_stock",
+      "level": 1,
+      "max_uses": 16,
+      "output": {
+        "count": 1,
+        "id": "minecraft:emerald"
+      },
+      "price_multiplier": 0.05,
+      "profession": "kaleidoscope_cookery:chef",
+      "reason": "Source-proven CHEF BUY offer, not a seed/meal sale. Keep old finite-stock purchase and add same-price canonical-input compatibility without deleting the profession.",
+      "villager_xp": 2
+    },
+    {
+      "canonical_input": "farmersdelight:rice",
+      "canonical_offer": "requires_native_exact_compatibility_factory",
+      "evidence": [
+        "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/event/ModTradesEvent.java#addNoviceTrades"
+      ],
+      "input_count": 20,
+      "legacy_input": "kaleidoscope_cookery:rice",
+      "legacy_offer": "retain_for_finite_stock",
+      "level": 1,
+      "max_uses": 16,
+      "output": {
+        "count": 1,
+        "id": "minecraft:emerald"
+      },
+      "price_multiplier": 0.05,
+      "profession": "kaleidoscope_cookery:chef",
+      "reason": "Source-proven CHEF BUY offer, not a seed/meal sale. Keep old finite-stock purchase and add same-price canonical-input compatibility without deleting the profession.",
+      "villager_xp": 2
+    }
+  ],
+  "worldgen": {
+    "exact_templates": [
+      "kaleidoscope_cookery:village/houses/desert_kitchen",
+      "kaleidoscope_cookery:village/houses/plains_kitchen",
+      "kaleidoscope_cookery:village/houses/savanna_kitchen",
+      "kaleidoscope_cookery:village/houses/snowy_kitchen",
+      "kaleidoscope_cookery:village/houses/taiga_kitchen"
+    ],
+    "existing_world_blocks": "retain",
+    "finite_existing_stock": "retain",
+    "processor": "kaleidoscope_cookery:crop_replace",
+    "rule": "Only new exact kitchen tomato palettes become FD wild tomatoes; lettuce processor becomes FD wild cabbage; preserve distinct chili and both native probabilities. BCC native wild-forage authority must prove nonplantable finite food-only drops.",
+    "status": "authored_canonical_finite_forage_pending_native"
+  }
+}

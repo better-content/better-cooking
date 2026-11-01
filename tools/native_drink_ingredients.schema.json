@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "better_cooking:native_drink_ingredients.v2",
+  "title": "Observed input templates, never automatically installed or paid materials",
+  "type": "object",
+  "required": ["schema", "binding", "native_drink_ingredients"],
+  "properties": {
+    "schema": {"const": "better_cooking:native_drink_ingredients.v2"},
+    "binding": {"oneOf": [{"type": "null"}, {"type": "object", "additionalProperties": false, "required": ["runtime_inputs_sha256", "native_snapshot_sha256"], "properties": {"runtime_inputs_sha256": {"$ref": "#/$defs/hash"}, "native_snapshot_sha256": {"$ref": "#/$defs/hash"}}}]},
+    "qualification": {"const": false}, "auto_install": {"const": false},
+    "status": {"type": "string"},
+    "native_snapshot_raw_sha256": {"type": ["string", "null"], "description": "Unbound candidate may be null. Root MUST replace with ACTUAL original raw-byte SHA before strict verification when present; canonical serialization is not raw identity."},
+    "native_snapshot_canonical_sha256": {"type": ["string", "null"], "description": "Audit only; not Root raw binding."},
+    "native_drink_ingredients": {"type": "array", "maxItems": 512, "items": {"$ref": "#/$defs/input"}}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "nutrients": {"type": ["object", "null"], "additionalProperties": {"type": "number", "minimum": 0, "maximum": 10000}},
+    "dose": {"type": ["number", "null"], "minimum": 0, "maximum": 10000},
+    "input": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "observation_kind", "template_basis", "input_template", "item_class", "is_edible", "food_properties", "nutrients", "sugar", "alcohol", "spice", "paid_intake", "gaps"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$"},
+        "observation_kind": {"const": "observed_template"},
+        "template_basis": {"enum": ["native_default", "provider_purity3_variant"]},
+        "input_template": {"type": "string", "minLength": 1, "maxLength": 65536, "description": "Exact full native count1 stack.save SNBT. Water is actual PUBLIC addPurity(default bucket,3) observed substrate, NOT vanilla default/paid material. Root typed parser verifies full exact expected NBT/id/Count1; no stripping or Python regex inference."},
+        "item_class": {"type": "string", "minLength": 1}, "is_edible": {"type": "boolean"}, "gaps": {"type": "object"},
+        "food_properties": {"oneOf": [{"type": "null"}, {"type": "object", "additionalProperties": false, "required": ["hunger", "saturation_modifier"], "properties": {"hunger": {"type": "integer", "minimum": 0, "maximum": 10000}, "saturation_modifier": {"type": "number", "minimum": 0, "maximum": 10000}}}]},
+        "nutrients": {"$ref": "#/$defs/nutrients"}, "sugar": {"$ref": "#/$defs/dose"}, "alcohol": {"$ref": "#/$defs/dose"}, "spice": {"$ref": "#/$defs/dose"},
+        "paid_intake": {
+          "type": "object", "additionalProperties": false,
+          "required": ["complete", "nutrients", "sugar", "alcohol", "spice"],
+          "properties": {"complete": {"type": "boolean"}, "nutrients": {"$ref": "#/$defs/nutrients"}, "sugar": {"$ref": "#/$defs/dose"}, "alcohol": {"$ref": "#/$defs/dose"}, "spice": {"$ref": "#/$defs/dose"}, "reason": {"type": "string", "minLength": 1}},
+          "allOf": [{"if": {"properties": {"complete": {"const": true}}}, "then": {"not": {"required": ["reason"]}, "properties": {"nutrients": {"type": "object", "propertyNames": {"enum": ["proteins", "grains", "fruits", "fats", "dairy", "vegetables"]}}, "sugar": {"type": "number"}, "alcohol": {"type": "number"}, "spice": {"type": "number"}}}, "else": {"required": ["reason"], "properties": {"nutrients": {"type": "null"}, "sugar": {"type": "null"}, "alcohol": {"type": "null"}, "spice": {"type": "null"}}}}]
+        }
+      },
+      "allOf": [{"if": {"properties": {"id": {"const": "minecraft:water_bucket"}}}, "then": {"properties": {"template_basis": {"const": "provider_purity3_variant"}}}, "else": {"properties": {"template_basis": {"const": "native_default"}}}}]
+    }
+  },
+  "description": "v1/default_stack strictly rejected. Entire exact 13-field actual raw rows are deep-copied, including getters/gaps and unknown/null values. No synthetic observations, auto-install or formula doses. Root must verify raw UTF8 SHA, exact row equality with strict decimal semantics, actual current provider/resource BYTE domain and real connected producer; then native parser exact expected template. Pure source checks are not native qualification."
+}

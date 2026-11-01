@@ -1,0 +1,227 @@
+plugins {
+    id 'java'
+    id 'net.minecraftforge.gradle' version '6.0.54'
+    id 'org.spongepowered.mixin' version '0.7.38'
+}
+group = 'com.bettercontent'
+version = '0.1.0'
+base { archivesName = 'better-cooking' }
+java { toolchain.languageVersion = JavaLanguageVersion.of(17) }
+
+def policyInput = file(providers.gradleProperty('culinaryPolicy').orElse('../../better-content-modpack/kubejs/config/culinary_policy.json').get())
+def policyHash = policyInput.isFile() ? java.security.MessageDigest.getInstance('SHA-256').digest(policyInput.bytes).encodeHex().toString() : 'MISSING'
+def pinned = []
+def bindJar = { String label, File input ->
+    if (!input.isFile()) throw new GradleException("Missing explicit ${label} input: ${input}")
+    def bytes = input.bytes
+    def hash = java.security.MessageDigest.getInstance('SHA-256').digest(bytes).encodeHex().toString()
+    def directory = file(".gradle/pinned-inputs/${hash}")
+    def snapshot = new File(directory, "${label}-${hash}.jar")
+    if (!snapshot.isFile()) { directory.mkdirs(); java.nio.file.Files.write(snapshot.toPath(), bytes) }
+    else if (!java.util.Arrays.equals(snapshot.bytes, bytes)) throw new GradleException("Corrupt immutable input ${snapshot}")
+    pinned.add([label:label, sha256:hash, file:input.absolutePath, snapshot:directory])
+    return "bettercontent.cooking.local:${label}:${hash}"
+}
+def kaleidoscopePath = providers.gradleProperty('kaleidoscopeJar').orNull
+if (kaleidoscopePath == null || kaleidoscopePath.isBlank()) throw new GradleException('Bind pinned Kaleidoscope with -PkaleidoscopeJar=/absolute/path/to/1.6.0.jar')
+def kaleidoscope = bindJar('kaleidoscope', file(kaleidoscopePath))
+def explicitUpstream = { String property, String label ->
+    def path = providers.gradleProperty(property).orNull
+    if (path == null || path.isBlank()) throw new GradleException("Bind pinned ${label} with -P${property}=/absolute/path.jar")
+    bindJar(label, file(path))
+}
+def farmersDelight = explicitUpstream('farmersDelightJar', 'farmers-delight')
+def ubesDelight = explicitUpstream('ubesDelightJar', 'ubes-delight')
+def ponder = explicitUpstream('ponderJar', 'ponder')
+if (pinned.find { it.label == 'ponder' }.sha256 != '86e6b64372aba6d9c56f2c35725ea26d8febf2c75eed9950566e7f2849443b34')
+    throw new GradleException('Ponder must match the actual pinned 1.0.91 runtime bytes; a version label alone is insufficient')
+def providerDirectory = providers.environmentVariable('BC_CUSTOM_MOD_JAR_DIR').orNull
+if (providerDirectory != null && providerDirectory.isBlank()) throw new GradleException('Blank BC_CUSTOM_MOD_JAR_DIR')
+def provider = { String repo, String name ->
+    bindJar(repo, file(providerDirectory == null ? "../${repo}/build/libs/${name}" : new File(providerDirectory, name)))
+}
+def physiology = provider('better-survival-physiology', 'better-survival-physiology-0.1.1.jar')
+def water = provider('better-drinking-water', 'better-drinking-water-1.1.0.jar')
+def heat = provider('better-industrial-heat', 'better-industrial-heat-0.1.0.jar')
+def spice = provider('better-spicy-farmers', 'better-spicy-farmers-0.1.0.jar')
+def commerce = provider('better-spirit-commerce', 'better-spirit-commerce-1.0.1.jar')
+def bumblezone = provider('better-bumblezone-crops', 'better-bumblezone-crops-0.1.0.jar')
+
+sourceSets {
+    nativeFixture {
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+    }
+    // Pure package-private fixture helpers are tested without shipping JUnit or exposing test APIs.
+    test {
+        compileClasspath += sourceSets.nativeFixture.output
+        runtimeClasspath += sourceSets.nativeFixture.output
+    }
+}
+tasks.named('compileTestJava') { dependsOn tasks.named('nativeFixtureClasses') }
+tasks.named('test') { dependsOn tasks.named('nativeFixtureClasses') }
+def attemptId = providers.gradleProperty('nativeAttemptId').orElse(UUID.randomUUID().toString()).get()
+if (UUID.fromString(attemptId).toString() != attemptId) throw new GradleException('Noncanonical native attempt UUID')
+def nativeRun = layout.buildDirectory.dir("native/${attemptId}")
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+    copyIdeResources = true
+    runs {
+        configureEach {
+            property 'forge.logging.console.level', 'info'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            mods { better_cooking { source sourceSets.main } }
+            jvmArgs '-Xmx2G', '-XX:ActiveProcessorCount=2', '-Djava.io.tmpdir=/home/dev/.tmp'
+        }
+        client { workingDirectory project.file('run/client') }
+        server { workingDirectory project.file('run/server'); args '--nogui' }
+        gameTestServer {
+            workingDirectory nativeRun.get().asFile
+            property 'forge.enabledGameTestNamespaces', providers.gradleProperty('nativeNamespaces').orElse('better_cooking').get()
+            property 'better_cooking.discoveryOnly', providers.gradleProperty('discoveryOnly').orElse('false').get()
+            if (providers.gradleProperty('nativeCatalogueOutput').isPresent()) property 'better_cooking.nativeCatalogueOutput', providers.gradleProperty('nativeCatalogueOutput').get()
+            property 'forge.enableGameTest', 'true'
+            property 'forge.gameTestServer', 'true'
+            mods { better_cooking { source sourceSets.nativeFixture } }
+            args '--nogui'
+        }
+    }
+}
+repositories {
+    pinned.each { row -> flatDir { dirs row.snapshot; content { includeGroup('bettercontent.cooking.local') } } }
+    maven { url = 'https://cursemaven.com'; content { includeGroup 'curse.maven' } }
+    maven { url = 'https://maven.minecraftforge.net' }
+    maven { url = 'https://maven.createmod.net' }
+    maven { url = 'https://maven.ithundxr.dev/mirror' }
+    maven { url = 'https://maven.tterrag.com' }
+    mavenCentral()
+}
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.22'
+    implementation fg.deobf(kaleidoscope)
+    implementation fg.deobf(farmersDelight)
+    implementation fg.deobf(ubesDelight)
+    compileOnly fg.deobf(physiology)
+    compileOnly fg.deobf(water)
+    compileOnly fg.deobf(heat)
+    compileOnly fg.deobf(spice)
+    testRuntimeOnly fg.deobf(spice)
+    compileOnly fg.deobf(commerce)
+    compileOnly fg.deobf(bumblezone)
+    testRuntimeOnly fg.deobf(bumblezone)
+    def typed = providers.gradleProperty('typedProviderClasses').orNull
+    if (typed != null) { if (!file(typed).isDirectory()) throw new GradleException('Missing typedProviderClasses'); compileOnly files(typed) }
+    compileOnly fg.deobf('curse.maven:diet-443570:4813904')
+    compileOnly fg.deobf('curse.maven:thirst-679270:6660408')
+    compileOnly fg.deobf('curse.maven:emi-580555:8081375')
+    compileOnly fg.deobf('curse.maven:create-328085:7178761')
+    compileOnly fg.deobf(ponder)
+    compileOnly fg.deobf('dev.engine-room.flywheel:flywheel-forge-1.20.1:1.0.5')
+    compileOnly fg.deobf('com.tterrag.registrate:Registrate:MC1.20-1.3.3')
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+}
+mixin { add sourceSets.main, 'better_cooking.refmap.json'; config 'better_cooking.mixins.json' }
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'; options.release = 17
+    // Namespace changes must not leave stale split-package fixture classes in the next JAR.
+    options.incremental = false
+}
+tasks.withType(Test).configureEach {
+    useJUnitPlatform(); maxParallelForks = 1
+    // The 7.8MB complete culinary fixture exceeds Gradle's 512MiB default test-worker heap.
+    maxHeapSize = '2g'
+    systemProperty 'better_cooking.pinnedFarmersDelight', pinned.find { it.label == 'farmers-delight' }.file
+    systemProperty 'better_cooking.rawKcJar', file(kaleidoscopePath).absolutePath
+    systemProperty 'better_cooking.rawPonderJar', pinned.find { it.label == 'ponder' }.file
+}
+processResources {
+    inputs.property 'version', project.version
+    inputs.file(policyInput)
+    inputs.property 'pinnedPolicySha256', policyHash
+    filesMatching('META-INF/mods.toml') { expand version:project.version }
+    from(policyInput) { into 'better_cooking'; rename { 'culinary_policy.json' } }
+    doFirst {
+        if (!policyInput.isFile()) throw new GradleException("Missing explicit policy input ${policyInput}")
+        if(java.security.MessageDigest.getInstance('SHA-256').digest(policyInput.bytes).encodeHex().toString()!=policyHash)
+            throw new GradleException('Explicit cooking policy changed during this build; freeze inputs and start a new build')
+    }
+}
+tasks.register('writeInputReceipt') {
+    inputs.file policyInput
+    inputs.property 'dependencyHashes', pinned.collect { it.label+':'+it.sha256 }.sort().join('|')
+    inputs.property 'pinnedPolicySha256', policyHash
+    outputs.file layout.buildDirectory.file('qualification/build-inputs.json')
+    doLast {
+        def target = layout.buildDirectory.file('qualification/build-inputs.json').get().asFile
+        target.parentFile.mkdirs()
+        target.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([
+            schema:1, status:'build-inputs-only', policySha256:policyHash,
+            dependencies:pinned.collect { [id:it.label, sha256:it.sha256, path:it.file] }])) + '\n'
+    }
+}
+classes.dependsOn 'writeInputReceipt'
+tasks.register('verifyFast') { group='verification'; dependsOn 'test' }
+tasks.register('nativeFixtureJar', Jar) {
+    group='verification'; description='Nonshipping actual Minecraft fixture; never activate in the production pack.'
+    dependsOn tasks.named('nativeFixtureClasses')
+    archiveClassifier = 'native-fixture'
+    destinationDirectory = layout.buildDirectory.dir('native-fixture-raw')
+    from sourceSets.nativeFixture.output
+}
+reobf { nativeFixtureJar {} }
+tasks.register('verifyNativeFixturePackageIsolation') {
+    group = 'verification'
+    description = 'Reject split Java-module packages in the exact reobfuscated main/fixture pair before native launch.'
+    dependsOn 'reobfJar', 'reobfNativeFixtureJar'
+    def mainArchive = layout.buildDirectory.file('reobfJar/output.jar')
+    def fixtureArchive = layout.buildDirectory.file('reobfNativeFixtureJar/output.jar')
+    inputs.files mainArchive, fixtureArchive
+    outputs.file layout.buildDirectory.file('qualification/native-package-isolation.json')
+    doLast {
+        def packages = { File archive ->
+            def names = new TreeSet<String>()
+            def result = new TreeSet<String>()
+            new java.util.zip.ZipFile(archive).withCloseable { zip ->
+                java.util.Collections.list(zip.entries()).findAll { !it.directory && it.name.endsWith('.class') }.each { entry ->
+                    if (!names.add(entry.name)) throw new GradleException("Duplicate class entry in ${archive}: ${entry.name}")
+                    int slash = entry.name.lastIndexOf('/')
+                    if (slash < 1 || entry.name.startsWith('META-INF/'))
+                        throw new GradleException("Unexpected unqualified/versioned class in owned JAR ${archive}: ${entry.name}")
+                    result.add(entry.name.substring(0, slash).replace('/', '.'))
+                }
+            }
+            if (names.isEmpty()) throw new GradleException("Owned JAR contains no classes: ${archive}")
+            [packages:result, classes:names.size()]
+        }
+        File main = mainArchive.get().asFile, fixture = fixtureArchive.get().asFile
+        def a = packages(main), b = packages(fixture)
+        def overlap = a.packages.intersect(b.packages)
+        if (!overlap.isEmpty()) throw new GradleException("Main/native fixture split packages (Forge Java-module launch would fail): ${overlap}")
+        def sha = { File file -> java.security.MessageDigest.getInstance('SHA-256').digest(file.bytes).encodeHex().toString() }
+        def target = layout.buildDirectory.file('qualification/native-package-isolation.json').get().asFile
+        target.parentFile.mkdirs()
+        target.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson([
+            schema:'better_cooking:native_package_isolation.v1', status:'package_checked_not_native_acceptance',
+            acceptance:false, main:[sha256:sha(main), classes:a.classes, packages:a.packages],
+            fixture:[sha256:sha(fixture), classes:b.classes, packages:b.packages], overlap:[]])) + '\n'
+    }
+}
+tasks.register('stageNativeFixtureJar', Copy) {
+    dependsOn 'reobfNativeFixtureJar', 'verifyNativeFixturePackageIsolation'
+    from layout.buildDirectory.file('reobfNativeFixtureJar/output.jar')
+    into layout.buildDirectory.dir('native-fixture-libs')
+    rename { "better-cooking-${project.version}-native-fixture.jar" }
+}
+tasks.register('stageRuntimeJar', Copy) {
+    group='build'; description='Stage source-local reobfuscated JAR; never deploy to the pack.'
+    dependsOn 'reobfJar'
+    from layout.buildDirectory.file('reobfJar/output.jar')
+    into layout.buildDirectory.dir('libs')
+    rename { "better-cooking-${project.version}.jar" }
+}
+jar {
+    manifest { attributes('MixinConfigs':'better_cooking.mixins.json', 'Implementation-Title':'Better Cooking', 'Implementation-Version':project.version) }
+    finalizedBy 'reobfJar'
+}

@@ -1,0 +1,737 @@
+{
+  "consumables": {
+    "kaleidoscope_cookery:barley_tea": {
+      "completed_item_debit": 1,
+      "creative_policy": "preserve_native_creative_action_no_paid_completion_credit",
+      "evidence": [
+        "kc1.6.0:TeacupItem#finishUsingItem",
+        "kc1.6.0:IHasContainer#returnContainerToEntity",
+        "kc1.6.0:CommonRegistry#onBlockRegistryEvent",
+        "kc1.6.0:TeacupRegistry#init/barley_tea"
+      ],
+      "food_properties": null,
+      "hydration": null,
+      "id": "kaleidoscope_cookery:barley_tea",
+      "intake_owner": "better_cooking_native_whole_completion_not_Water_paid_reserve",
+      "is_edible": false,
+      "item_class": "com.github.ysbbbbbb.kaleidoscopecookery.item.TeacupItem",
+      "kind": "native_whole_drink",
+      "legacy_balance_fallback": {
+        "authorization": "Root wJ:p7 explicit 2026-10-28T13 R8-release decision; Hydro wR:p5 confirmed Water16/20 Milk12/16 per1000mB",
+        "basis": "oldstock_undercredit_policy_not_physical_paid_entitlement_or_native_getter",
+        "class": "root_explicit_conservative_legacy_native_drink_balance",
+        "hydration": 1.3333333333333333,
+        "invalid_or_unpaid_new_receipt_must_not_fallback": true,
+        "new_receipt_overrides_legacy": true,
+        "quenching": 1.6666666666666667,
+        "reference_mb_numerator": 1000,
+        "unknown_nutrition_not_zero": true,
+        "yield_denominator": 12
+      },
+      "nutrients": null,
+      "placed_group_max_is_not_servings": true,
+      "quenching": null,
+      "remainder": "kaleidoscope_cookery:empty_cup",
+      "servings_per_item": 1,
+      "source_finish_food_mutation": {
+        "basis": "source_finish_has_no_FoodData_eat_call",
+        "evidence": [
+          "kc1.6.0:TeacupItem#finishUsingItem"
+        ],
+        "kind": "none",
+        "normalized_target": {
+          "hunger": 0,
+          "saturation_modifier": 0
+        },
+        "status": "source_only_not_observed_finish"
+      },
+      "source_production": {
+        "creative_filling": "unpaid_receipt_required_never_fallback_to_positive_legacy_entitlement",
+        "dose_basis": "actual_paid_fluid_profile_divided_by_twelve_realized_cups",
+        "evidence": [
+          "kc1.6.0:TeapotRecipe#assemble",
+          "kc1.6.0:TeapotBlockEntity#addTeaFluid"
+        ],
+        "fluid_id": "minecraft:water",
+        "fluid_mb": 1000,
+        "kind": "native_teapot",
+        "output_count": 12,
+        "recipe_ids": [
+          "kaleidoscope_cookery:teapot/barley_tea"
+        ],
+        "source_safety_requires_native_closure": true,
+        "source_safety_status": "actual_source_NBT_not_a_proof_of_purity_effect_delivery_or_heat_purification"
+      },
+      "source_selected_effects": [
+        {
+          "amplifier": 0,
+          "chance": 1,
+          "duration": 9600,
+          "id": "kaleidoscope_cookery:vitality"
+        }
+      ],
+      "source_utility": "native_declared_tea_effects",
+      "status": "source_reviewed_pending_native",
+      "use_animation": "drink",
+      "use_duration_ticks": 32
+    },
+    "kaleidoscope_cookery:biluochun": {
+      "completed_item_debit": 1,
+      "creative_policy": "preserve_native_creative_action_no_paid_completion_credit",
+      "evidence": [
+        "kc1.6.0:TeacupItem#finishUsingItem",
+        "kc1.6.0:IHasContainer#returnContainerToEntity",
+        "kc1.6.0:CommonRegistry#onBlockRegistryEvent",
+        "kc1.6.0:TeacupRegistry#init/biluochun"
+      ],
+      "food_properties": null,
+      "hydration": null,
+      "id": "kaleidoscope_cookery:biluochun",
+      "intake_owner": "better_cooking_native_whole_completion_not_Water_paid_reserve",
+      "is_edible": false,
+      "item_class": "com.github.ysbbbbbb.kaleidoscopecookery.item.TeacupItem",
+      "kind": "native_whole_drink",
+      "legacy_balance_fallback": {
+        "authorization": "Root wJ:p7 explicit 2026-10-28T13 R8-release decision; Hydro wR:p5 confirmed Water16/20 Milk12/16 per1000mB",
+        "basis": "oldstock_undercredit_policy_not_physical_paid_entitlement_or_native_getter",
+        "class": "root_explicit_conservative_legacy_native_drink_balance",
+        "hydration": 1.3333333333333333,
+        "invalid_or_unpaid_new_receipt_must_not_fallback": true,
+        "new_receipt_overrides_legacy": true,
+        "quenching": 1.6666666666666667,
+        "reference_mb_numerator": 1000,
+        "unknown_nutrition_not_zero": true,
+        "yield_denominator": 12
+      },
+      "nutrients": null,
+      "placed_group_max_is_not_servings": true,
+      "quenching": null,
+      "remainder": "kaleidoscope_cookery:empty_cup",
+      "servings_per_item": 1,
+      "source_finish_food_mutation": {
+        "basis": "source_finish_has_no_FoodData_eat_call",
+        "evidence": [
+          "kc1.6.0:TeacupItem#finishUsingItem"
+        ],
+        "kind": "none",
+        "normalized_target": {
+          "hunger": 0,
+          "saturation_modifier": 0
+        },
+        "status": "source_only_not_observed_finish"
+      },
+      "source_production": {
+        "creative_filling": "unpaid_receipt_required_never_fallback_to_positive_legacy_entitlement",
+        "dose_basis": "actual_paid_fluid_profile_divided_by_twelve_realized_cups",
+        "evidence": [
+          "kc1.6.0:TeapotRecipe#assemble",
+          "kc1.6.0:TeapotBlockEntity#addTeaFluid"
+        ],
+        "fluid_id": "minecraft:water",
+        "fluid_mb": 1000,
+        "kind": "native_teapot",
+        "output_count": 12,
+        "recipe_ids": [
+          "kaleidoscope_cookery:teapot/biluochun"
+        ],
+        "source_safety_requires_native_closure": true,
+        "source_safety_status": "actual_source_NBT_not_a_proof_of_purity_effect_delivery_or_heat_purification"
+      },
+      "source_selected_effects": [
+        {
+          "amplifier": 0,
+          "chance": 1,
+          "duration": 7200,
+          "id": "kaleidoscope_cookery:projectile_dodge"
+        }
+      ],
+      "source_utility": "native_declared_tea_effects",
+      "status": "source_reviewed_pending_native",
+      "use_animation": "drink",
+      "use_duration_ticks": 32
+    },
+    "kaleidoscope_cookery:butter_tea": {
+      "completed_item_debit": 1,
+      "creative_policy": "preserve_native_creative_action_no_paid_completion_credit",
+      "evidence": [
+        "kc1.6.0:TeacupItem#finishUsingItem",
+        "kc1.6.0:IHasContainer#returnContainerToEntity",
+        "kc1.6.0:CommonRegistry#onBlockRegistryEvent",
+        "kc1.6.0:TeacupRegistry#init/butter_tea"
+      ],
+      "food_properties": null,
+      "hydration": null,
+      "id": "kaleidoscope_cookery:butter_tea",
+      "intake_owner": "better_cooking_native_whole_completion_not_Water_paid_reserve",
+      "is_edible": false,
+      "item_class": "com.github.ysbbbbbb.kaleidoscopecookery.item.TeacupItem",
+      "kind": "native_whole_drink",
+      "legacy_balance_fallback": {
+        "authorization": "Root wJ:p7 explicit 2026-10-28T13 R8-release decision; Hydro wR:p5 confirmed Water16/20 Milk12/16 per1000mB",
+        "basis": "oldstock_undercredit_policy_not_physical_paid_entitlement_or_native_getter",
+        "class": "root_explicit_conservative_legacy_native_drink_balance",
+        "hydration": 1.0,
+        "invalid_or_unpaid_new_receipt_must_not_fallback": true,
+        "new_receipt_overrides_legacy": true,
+        "quenching": 1.3333333333333333,
+        "reference_mb_numerator": 1000,
+        "unknown_nutrition_not_zero": true,
+        "yield_denominator": 12
+      },
+      "nutrients": null,
+      "placed_group_max_is_not_servings": true,
+      "quenching": null,
+      "remainder": "kaleidoscope_cookery:empty_cup",
+      "servings_per_item": 1,
+      "source_finish_food_mutation": {
+        "basis": "source_finish_has_no_FoodData_eat_call",
+        "evidence": [
+          "kc1.6.0:TeacupItem#finishUsingItem"
+        ],
+        "kind": "none",
+        "normalized_target": {
+          "hunger": 0,
+          "saturation_modifier": 0
+        },
+        "status": "source_only_not_observed_finish"
+      },
+      "source_production": {
+        "creative_filling": "unpaid_receipt_required_never_fallback_to_positive_legacy_entitlement",
+        "dose_basis": "actual_paid_fluid_profile_divided_by_twelve_realized_cups",
+        "evidence": [
+          "kc1.6.0:TeapotRecipe#assemble",
+          "kc1.6.0:TeapotBlockEntity#addTeaFluid"
+        ],
+        "fluid_id": "minecraft:milk",
+        "fluid_mb": 1000,
+        "kind": "native_teapot",
+        "output_count": 12,
+        "recipe_ids": [
+          "kaleidoscope_cookery:teapot/butter_tea"
+        ],
+        "source_safety_requires_native_closure": true,
+        "source_safety_status": "actual_source_NBT_not_a_proof_of_purity_effect_delivery_or_heat_purification"
+      },
+      "source_selected_effects": [
+        {
+          "amplifier": 0,
+          "chance": 1,
+          "duration": 900,
+          "id": "kaleidoscope_cookery:projectile_dodge"
+        }
+      ],
+      "source_utility": "native_declared_tea_effects",
+      "status": "source_reviewed_pending_native",
+      "use_animation": "drink",
+      "use_duration_ticks": 32
+    },
+    "kaleidoscope_cookery:clay_pot_milk_tea": {
+      "completed_item_debit": 1,
+      "creative_policy": "preserve_native_creative_action_no_paid_completion_credit",
+      "evidence": [
+        "kc1.6.0:ClayPotMilkTeaItem#finishUsingItem",
+        "kc1.6.0:IHasContainer#returnContainerToEntity",
+        "kc1.6.0:ModItems#CLAY_POT_MILK_TEA"
+      ],
+      "food_properties": null,
+      "hydration": null,
+      "id": "kaleidoscope_cookery:clay_pot_milk_tea",
+      "intake_owner": "better_cooking_native_whole_completion_not_Water_paid_reserve",
+      "is_edible": false,
+      "item_class": "com.github.ysbbbbbb.kaleidoscopecookery.item.ClayPotMilkTeaItem",
+      "kind": "native_whole_drink",
+      "legacy_balance_fallback": {
+        "authorization": "Root wJ:p7 explicit 2026-10-28T13 R8-release decision; Hydro wR:p5 confirmed Water16/20 Milk12/16 per1000mB",
+        "basis": "oldstock_undercredit_policy_not_physical_paid_entitlement_or_native_getter",
+        "class": "root_explicit_conservative_legacy_native_drink_balance",
+        "hydration": 1.3333333333333333,
+        "invalid_or_unpaid_new_receipt_must_not_fallback": true,
+        "new_receipt_overrides_legacy": true,
+        "quenching": 1.7777777777777777,
+        "reference_mb_numerator": 1000,
+        "unknown_nutrition_not_zero": true,
+        "yield_denominator": 9
+      },
+      "nutrients": null,
+      "placed_group_max_is_not_servings": true,
+      "quenching": null,
+      "remainder": "minecraft:flower_pot",
+      "servings_per_item": 1,
+      "source_finish_food_mutation": {
+        "basis": "source_finish_has_no_FoodData_eat_call",
+        "evidence": [
+          "kc1.6.0:ClayPotMilkTeaItem#finishUsingItem"
+        ],
+        "kind": "none",
+        "normalized_target": {
+          "hunger": 0,
+          "saturation_modifier": 0
+        },
+        "status": "source_only_not_observed_finish"
+      },
+      "source_production": {
+        "creative_filling": "unpaid_receipt_required_never_fallback_to_positive_legacy_entitlement",
+        "dose_basis": "actual_paid_soup_base_profile_divided_by_actual_realized_item_yield",
+        "evidence": [
+          "kc1.6.0:StockpotBlockEntity#addSoupBase",
+          "kc1.6.0:ModSoupBases#registerAll"
+        ],
+        "fluid_mb": null,
+        "kind": "native_stockpot",
+        "output_counts": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "paid_soup_base_items": 1,
+        "recipe_ids": [
+          "kaleidoscope_cookery:stockpot/clay_pot_milk_tea_count_1",
+          "kaleidoscope_cookery:stockpot/clay_pot_milk_tea_count_2",
+          "kaleidoscope_cookery:stockpot/clay_pot_milk_tea_count_3",
+          "kaleidoscope_cookery:stockpot/clay_pot_milk_tea_count_4",
+          "kaleidoscope_cookery:stockpot/clay_pot_milk_tea_count_5",
+          "kaleidoscope_cookery:stockpot/clay_pot_milk_tea_count_6",
+          "kaleidoscope_cookery:stockpot/clay_pot_milk_tea_count_7",
+          "kaleidoscope_cookery:stockpot/clay_pot_milk_tea_count_8",
+          "kaleidoscope_cookery:stockpot/clay_pot_milk_tea_count_9"
+        ],
+        "source_safety_requires_native_closure": true,
+        "source_safety_status": "actual_source_NBT_not_a_proof_of_purity_effect_delivery_or_heat_purification"
+      },
+      "source_selected_effects": [],
+      "source_utility": "remove_all_active_harmful_effects_not_an_added_effect_dose",
+      "status": "source_reviewed_pending_native",
+      "use_animation": "drink",
+      "use_duration_ticks": 32
+    },
+    "kaleidoscope_cookery:flower_tea": {
+      "completed_item_debit": 1,
+      "creative_policy": "preserve_native_creative_action_no_paid_completion_credit",
+      "evidence": [
+        "kc1.6.0:TeacupItem#finishUsingItem",
+        "kc1.6.0:IHasContainer#returnContainerToEntity",
+        "kc1.6.0:CommonRegistry#onBlockRegistryEvent",
+        "kc1.6.0:TeacupRegistry#init/flower_tea"
+      ],
+      "food_properties": null,
+      "hydration": null,
+      "id": "kaleidoscope_cookery:flower_tea",
+      "intake_owner": "better_cooking_native_whole_completion_not_Water_paid_reserve",
+      "is_edible": false,
+      "item_class": "com.github.ysbbbbbb.kaleidoscopecookery.item.TeacupItem",
+      "kind": "native_whole_drink",
+      "legacy_balance_fallback": {
+        "authorization": "Root wJ:p7 explicit 2026-10-28T13 R8-release decision; Hydro wR:p5 confirmed Water16/20 Milk12/16 per1000mB",
+        "basis": "oldstock_undercredit_policy_not_physical_paid_entitlement_or_native_getter",
+        "class": "root_explicit_conservative_legacy_native_drink_balance",
+        "hydration": 1.3333333333333333,
+        "invalid_or_unpaid_new_receipt_must_not_fallback": true,
+        "new_receipt_overrides_legacy": true,
+        "quenching": 1.6666666666666667,
+        "reference_mb_numerator": 1000,
+        "unknown_nutrition_not_zero": true,
+        "yield_denominator": 12
+      },
+      "nutrients": null,
+      "placed_group_max_is_not_servings": true,
+      "quenching": null,
+      "remainder": "kaleidoscope_cookery:empty_cup",
+      "servings_per_item": 1,
+      "source_finish_food_mutation": {
+        "basis": "source_finish_has_no_FoodData_eat_call",
+        "evidence": [
+          "kc1.6.0:TeacupItem#finishUsingItem"
+        ],
+        "kind": "none",
+        "normalized_target": {
+          "hunger": 0,
+          "saturation_modifier": 0
+        },
+        "status": "source_only_not_observed_finish"
+      },
+      "source_production": {
+        "creative_filling": "unpaid_receipt_required_never_fallback_to_positive_legacy_entitlement",
+        "dose_basis": "actual_paid_fluid_profile_divided_by_twelve_realized_cups",
+        "evidence": [
+          "kc1.6.0:TeapotRecipe#assemble",
+          "kc1.6.0:TeapotBlockEntity#addTeaFluid"
+        ],
+        "fluid_id": "minecraft:water",
+        "fluid_mb": 1000,
+        "kind": "native_teapot",
+        "output_count": 12,
+        "recipe_ids": [
+          "kaleidoscope_cookery:teapot/flower_tea"
+        ],
+        "source_safety_requires_native_closure": true,
+        "source_safety_status": "actual_source_NBT_not_a_proof_of_purity_effect_delivery_or_heat_purification"
+      },
+      "source_selected_effects": [
+        {
+          "amplifier": 0,
+          "chance": 1,
+          "duration": 400,
+          "id": "minecraft:regeneration"
+        }
+      ],
+      "source_utility": "native_declared_tea_effects",
+      "status": "source_reviewed_pending_native",
+      "use_animation": "drink",
+      "use_duration_ticks": 32
+    },
+    "kaleidoscope_cookery:mystery_tea": {
+      "completed_item_debit": 1,
+      "creative_policy": "preserve_native_creative_action_no_paid_completion_credit",
+      "evidence": [
+        "kc1.6.0:TeacupItem#finishUsingItem",
+        "kc1.6.0:IHasContainer#returnContainerToEntity",
+        "kc1.6.0:CommonRegistry#onBlockRegistryEvent",
+        "kc1.6.0:TeacupRegistry#init/mystery_tea"
+      ],
+      "food_properties": null,
+      "hydration": null,
+      "id": "kaleidoscope_cookery:mystery_tea",
+      "intake_owner": "better_cooking_native_whole_completion_not_Water_paid_reserve",
+      "is_edible": false,
+      "item_class": "com.github.ysbbbbbb.kaleidoscopecookery.item.TeacupItem",
+      "kind": "native_whole_drink",
+      "legacy_balance_fallback": {
+        "authorization": "Root wJ:p7 explicit 2026-10-28T13 R8-release decision; Hydro wR:p5 confirmed Water16/20 Milk12/16 per1000mB",
+        "basis": "oldstock_undercredit_policy_not_physical_paid_entitlement_or_native_getter",
+        "class": "root_explicit_conservative_legacy_native_drink_balance",
+        "hydration": 0,
+        "invalid_or_unpaid_new_receipt_must_not_fallback": true,
+        "new_receipt_overrides_legacy": true,
+        "quenching": 0,
+        "reference_mb_numerator": null,
+        "unknown_nutrition_not_zero": true,
+        "yield_denominator": null
+      },
+      "nutrients": null,
+      "placed_group_max_is_not_servings": true,
+      "quenching": null,
+      "remainder": "kaleidoscope_cookery:empty_cup",
+      "servings_per_item": 1,
+      "source_finish_food_mutation": {
+        "basis": "source_finish_has_no_FoodData_eat_call",
+        "evidence": [
+          "kc1.6.0:TeacupItem#finishUsingItem"
+        ],
+        "kind": "none",
+        "normalized_target": {
+          "hunger": 0,
+          "saturation_modifier": 0
+        },
+        "status": "source_only_not_observed_finish"
+      },
+      "source_production": {
+        "accepted_source_fluids": "any_registered_fluid_at_least_1000mB_including_lava_and_mod_fluids",
+        "creative_filling": "unpaid_receipt_required_never_fallback_to_positive_legacy_entitlement",
+        "dose_basis": "actual_paid_fluid_profile_divided_by_four_realized_cups",
+        "dripstone_native_sources": [
+          "minecraft:water",
+          "minecraft:lava"
+        ],
+        "fluid_mb": 1000,
+        "kind": "native_teapot_unmatched_fallback_not_recipe_id",
+        "output_count": 4,
+        "recipe_ids": [],
+        "source_action_id": "kc1.6.0:TeapotBlockEntity#makeTea/unmatched",
+        "source_safety_requires_native_closure": true,
+        "source_safety_status": "actual_source_NBT_not_a_proof_of_purity_effect_delivery_or_heat_purification"
+      },
+      "source_selected_effects": [
+        {
+          "amplifier": 0,
+          "chance": 1,
+          "duration": 300,
+          "id": "minecraft:blindness"
+        }
+      ],
+      "source_utility": "native_declared_tea_effects",
+      "status": "source_reviewed_pending_native",
+      "use_animation": "drink",
+      "use_duration_ticks": 32
+    },
+    "kaleidoscope_cookery:oolong": {
+      "completed_item_debit": 1,
+      "creative_policy": "preserve_native_creative_action_no_paid_completion_credit",
+      "evidence": [
+        "kc1.6.0:TeacupItem#finishUsingItem",
+        "kc1.6.0:IHasContainer#returnContainerToEntity",
+        "kc1.6.0:CommonRegistry#onBlockRegistryEvent",
+        "kc1.6.0:TeacupRegistry#init/oolong"
+      ],
+      "food_properties": null,
+      "hydration": null,
+      "id": "kaleidoscope_cookery:oolong",
+      "intake_owner": "better_cooking_native_whole_completion_not_Water_paid_reserve",
+      "is_edible": false,
+      "item_class": "com.github.ysbbbbbb.kaleidoscopecookery.item.TeacupItem",
+      "kind": "native_whole_drink",
+      "legacy_balance_fallback": {
+        "authorization": "Root wJ:p7 explicit 2026-10-28T13 R8-release decision; Hydro wR:p5 confirmed Water16/20 Milk12/16 per1000mB",
+        "basis": "oldstock_undercredit_policy_not_physical_paid_entitlement_or_native_getter",
+        "class": "root_explicit_conservative_legacy_native_drink_balance",
+        "hydration": 1.3333333333333333,
+        "invalid_or_unpaid_new_receipt_must_not_fallback": true,
+        "new_receipt_overrides_legacy": true,
+        "quenching": 1.6666666666666667,
+        "reference_mb_numerator": 1000,
+        "unknown_nutrition_not_zero": true,
+        "yield_denominator": 12
+      },
+      "nutrients": null,
+      "placed_group_max_is_not_servings": true,
+      "quenching": null,
+      "remainder": "kaleidoscope_cookery:empty_cup",
+      "servings_per_item": 1,
+      "source_finish_food_mutation": {
+        "basis": "source_finish_has_no_FoodData_eat_call",
+        "evidence": [
+          "kc1.6.0:TeacupItem#finishUsingItem"
+        ],
+        "kind": "none",
+        "normalized_target": {
+          "hunger": 0,
+          "saturation_modifier": 0
+        },
+        "status": "source_only_not_observed_finish"
+      },
+      "source_production": {
+        "creative_filling": "unpaid_receipt_required_never_fallback_to_positive_legacy_entitlement",
+        "dose_basis": "actual_paid_fluid_profile_divided_by_twelve_realized_cups",
+        "evidence": [
+          "kc1.6.0:TeapotRecipe#assemble",
+          "kc1.6.0:TeapotBlockEntity#addTeaFluid"
+        ],
+        "fluid_id": "minecraft:water",
+        "fluid_mb": 1000,
+        "kind": "native_teapot",
+        "output_count": 12,
+        "recipe_ids": [
+          "kaleidoscope_cookery:teapot/oolong"
+        ],
+        "source_safety_requires_native_closure": true,
+        "source_safety_status": "actual_source_NBT_not_a_proof_of_purity_effect_delivery_or_heat_purification"
+      },
+      "source_selected_effects": [
+        {
+          "amplifier": 0,
+          "chance": 1,
+          "duration": 7200,
+          "id": "minecraft:slow_falling"
+        },
+        {
+          "amplifier": 0,
+          "chance": 1,
+          "duration": 7200,
+          "id": "minecraft:jump_boost"
+        }
+      ],
+      "source_utility": "native_declared_tea_effects",
+      "status": "source_reviewed_pending_native",
+      "use_animation": "drink",
+      "use_duration_ticks": 32
+    },
+    "kaleidoscope_cookery:sakura_fubuki": {
+      "completed_item_debit": 1,
+      "creative_policy": "preserve_native_creative_action_no_paid_completion_credit",
+      "evidence": [
+        "kc1.6.0:TeacupItem#finishUsingItem",
+        "kc1.6.0:IHasContainer#returnContainerToEntity",
+        "kc1.6.0:CommonRegistry#onBlockRegistryEvent",
+        "kc1.6.0:TeacupRegistry#init/sakura_fubuki"
+      ],
+      "food_properties": null,
+      "hydration": null,
+      "id": "kaleidoscope_cookery:sakura_fubuki",
+      "intake_owner": "better_cooking_native_whole_completion_not_Water_paid_reserve",
+      "is_edible": false,
+      "item_class": "com.github.ysbbbbbb.kaleidoscopecookery.item.TeacupItem",
+      "kind": "native_whole_drink",
+      "legacy_balance_fallback": {
+        "authorization": "Root wJ:p7 explicit 2026-10-28T13 R8-release decision; Hydro wR:p5 confirmed Water16/20 Milk12/16 per1000mB",
+        "basis": "oldstock_undercredit_policy_not_physical_paid_entitlement_or_native_getter",
+        "class": "root_explicit_conservative_legacy_native_drink_balance",
+        "hydration": 1.3333333333333333,
+        "invalid_or_unpaid_new_receipt_must_not_fallback": true,
+        "new_receipt_overrides_legacy": true,
+        "quenching": 1.6666666666666667,
+        "reference_mb_numerator": 1000,
+        "unknown_nutrition_not_zero": true,
+        "yield_denominator": 12
+      },
+      "nutrients": null,
+      "placed_group_max_is_not_servings": true,
+      "quenching": null,
+      "remainder": "kaleidoscope_cookery:empty_cup",
+      "servings_per_item": 1,
+      "source_finish_food_mutation": {
+        "basis": "source_finish_has_no_FoodData_eat_call",
+        "evidence": [
+          "kc1.6.0:TeacupItem#finishUsingItem"
+        ],
+        "kind": "none",
+        "normalized_target": {
+          "hunger": 0,
+          "saturation_modifier": 0
+        },
+        "status": "source_only_not_observed_finish"
+      },
+      "source_production": {
+        "creative_filling": "unpaid_receipt_required_never_fallback_to_positive_legacy_entitlement",
+        "dose_basis": "actual_paid_fluid_profile_divided_by_twelve_realized_cups",
+        "evidence": [
+          "kc1.6.0:TeapotRecipe#assemble",
+          "kc1.6.0:TeapotBlockEntity#addTeaFluid"
+        ],
+        "fluid_id": "minecraft:water",
+        "fluid_mb": 1000,
+        "kind": "native_teapot",
+        "output_count": 12,
+        "recipe_ids": [
+          "kaleidoscope_cookery:teapot/sakura_fubuki"
+        ],
+        "source_safety_requires_native_closure": true,
+        "source_safety_status": "actual_source_NBT_not_a_proof_of_purity_effect_delivery_or_heat_purification"
+      },
+      "source_selected_effects": [
+        {
+          "amplifier": 0,
+          "chance": 1,
+          "duration": 7200,
+          "id": "kaleidoscope_cookery:hinder"
+        }
+      ],
+      "source_utility": "native_declared_tea_effects",
+      "status": "source_reviewed_pending_native",
+      "use_animation": "drink",
+      "use_duration_ticks": 32
+    },
+    "kaleidoscope_cookery:tieguanyin": {
+      "completed_item_debit": 1,
+      "creative_policy": "preserve_native_creative_action_no_paid_completion_credit",
+      "evidence": [
+        "kc1.6.0:TeacupItem#finishUsingItem",
+        "kc1.6.0:IHasContainer#returnContainerToEntity",
+        "kc1.6.0:CommonRegistry#onBlockRegistryEvent",
+        "kc1.6.0:TeacupRegistry#init/tieguanyin"
+      ],
+      "food_properties": null,
+      "hydration": null,
+      "id": "kaleidoscope_cookery:tieguanyin",
+      "intake_owner": "better_cooking_native_whole_completion_not_Water_paid_reserve",
+      "is_edible": false,
+      "item_class": "com.github.ysbbbbbb.kaleidoscopecookery.item.TeacupItem",
+      "kind": "native_whole_drink",
+      "legacy_balance_fallback": {
+        "authorization": "Root wJ:p7 explicit 2026-10-28T13 R8-release decision; Hydro wR:p5 confirmed Water16/20 Milk12/16 per1000mB",
+        "basis": "oldstock_undercredit_policy_not_physical_paid_entitlement_or_native_getter",
+        "class": "root_explicit_conservative_legacy_native_drink_balance",
+        "hydration": 1.3333333333333333,
+        "invalid_or_unpaid_new_receipt_must_not_fallback": true,
+        "new_receipt_overrides_legacy": true,
+        "quenching": 1.6666666666666667,
+        "reference_mb_numerator": 1000,
+        "unknown_nutrition_not_zero": true,
+        "yield_denominator": 12
+      },
+      "nutrients": null,
+      "placed_group_max_is_not_servings": true,
+      "quenching": null,
+      "remainder": "kaleidoscope_cookery:empty_cup",
+      "servings_per_item": 1,
+      "source_finish_food_mutation": {
+        "basis": "source_finish_has_no_FoodData_eat_call",
+        "evidence": [
+          "kc1.6.0:TeacupItem#finishUsingItem"
+        ],
+        "kind": "none",
+        "normalized_target": {
+          "hunger": 0,
+          "saturation_modifier": 0
+        },
+        "status": "source_only_not_observed_finish"
+      },
+      "source_production": {
+        "creative_filling": "unpaid_receipt_required_never_fallback_to_positive_legacy_entitlement",
+        "dose_basis": "actual_paid_fluid_profile_divided_by_twelve_realized_cups",
+        "evidence": [
+          "kc1.6.0:TeapotRecipe#assemble",
+          "kc1.6.0:TeapotBlockEntity#addTeaFluid"
+        ],
+        "fluid_id": "minecraft:water",
+        "fluid_mb": 1000,
+        "kind": "native_teapot",
+        "output_count": 12,
+        "recipe_ids": [
+          "kaleidoscope_cookery:teapot/tieguanyin"
+        ],
+        "source_safety_requires_native_closure": true,
+        "source_safety_status": "actual_source_NBT_not_a_proof_of_purity_effect_delivery_or_heat_purification"
+      },
+      "source_selected_effects": [
+        {
+          "amplifier": 0,
+          "chance": 1,
+          "duration": 7200,
+          "id": "kaleidoscope_cookery:instant_smelting"
+        }
+      ],
+      "source_utility": "native_declared_tea_effects",
+      "status": "source_reviewed_pending_native",
+      "use_animation": "drink",
+      "use_duration_ticks": 32
+    }
+  },
+  "ingredient_inputs": {
+    "default_variant": "actual_count1_ItemStack_save_nativeSNBT_with_exact_tag_absence_or_contents",
+    "exact_item_ids": [
+      "kaleidoscope_cookery:barley_tea_bag",
+      "kaleidoscope_cookery:biluochun_tea_bag",
+      "kaleidoscope_cookery:butter_tea_bag",
+      "kaleidoscope_cookery:oolong_tea_bag",
+      "kaleidoscope_cookery:sakura_fubuki_tea_bag",
+      "kaleidoscope_cookery:tieguanyin_tea_bag",
+      "minecraft:milk_bucket",
+      "minecraft:water_bucket"
+    ],
+    "fluid_bucket_proxies_are_not_fluid_item_ids": true,
+    "live_item_tags": [
+      "kaleidoscope_cookery:flower_tea_ingredients"
+    ],
+    "source_tag_candidates": {
+      "kaleidoscope_cookery:flower_tea_ingredients": [
+        "minecraft:lilac",
+        "minecraft:rose_bush",
+        "minecraft:peony",
+        "minecraft:pitcher_plant",
+        "minecraft:sunflower"
+      ]
+    },
+    "source_tag_candidates_are_not_live_membership": true,
+    "status": "source_selectors_only_no_frozen_getter_facts"
+  },
+  "schema": "better_cooking:nonstandard_consumables.v1",
+  "source_inputs": {
+    "/home/dev/.tmp/kaleidoscope-review/kaleidoscopecookery-1.6.0-forge+mc1.20.1.jar": "0eee5579b36746825d6586c65051d9e68fc84178a19dec4372fc9d64b8629d62",
+    "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/api/item/IHasContainer.java": "13483d8dd7fb862001b29311517c61963a824e5c720cf32df66f71fe4c8b1e71",
+    "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/blockentity/kitchen/StockpotBlockEntity.java": "98b0a854dfd45ca891cddb42a9b37f4017a9d6bc509a44bf50005f418f40f0f4",
+    "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/blockentity/kitchen/TeapotBlockEntity.java": "b431915ba1edc8f7d0e5868b44c271c2059fa1bdf9ee2575bf1a5344f18ceaaa",
+    "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/crafting/recipe/TeapotRecipe.java": "9d5beeb3b3bf1b40daacd2f5c0a350c87b1dd74a427ecabb23a552fc47ccd2e7",
+    "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/init/ModItems.java": "ac7a1f6bd6b88f1b8a019307e6aba5a39b8211c7522874017ab99b8887ef2379",
+    "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/init/ModSoupBases.java": "c25cd29d1d3f9a9e6956d8ad8b5c17f801e4ab4cafd9f0ea3832ee2e2478c10f",
+    "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/init/registry/CommonRegistry.java": "68a7e4fcc3da657f76e7713c6c0ac018cb48c6f5e24641e8ffa98ed02c7c5838",
+    "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/init/registry/TeacupRegistry.java": "0b14b88e5a2e742ee9bf06887849fb1d32d0c267714b35ead8003c0cd4d16af5",
+    "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/item/ClayPotMilkTeaItem.java": "13aa489e761aaa73bf32061780c333b035974f1822cca6912307b12ffaf9fd37",
+    "/home/dev/.tmp/kaleidoscope-review/sources/com/github/ysbbbbbb/kaleidoscopecookery/item/TeacupItem.java": "965d234a8486b2951c618b365c68ae5cbc59c87dbdd45676aa6d7cfc0472227f"
+  },
+  "status": "source_reviewed_pending_native"
+}

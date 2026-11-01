@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "better_cooking:native_catalogue.v2",
+  "title": "UNTRUSTED observation shape only; external binding and structural checks mandatory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema","status","created_utc","qualification","discovery_only","food_tags_orientation","context","resource_inputs","recipe_identity","recipe_stack_nbt_basis","importable","registered_items","block_items","item_tags","food_tags","mods","foods","recipes","gaps","native_consumables","native_drink_ingredients","native_drink_ingredients_context","native_consumables_context","native_fd_carriers","native_fd_feasts"],
+  "properties": {
+    "schema": {"const":"better_cooking:native_catalogue.v2"},
+    "status": {"const":"observed_unqualified"},
+    "created_utc": {"type":"string"},
+    "qualification": {"const":false}, "discovery_only": {"const":true}, "importable": {"const":true},
+    "food_tags_orientation": {"const":"tag_to_items"},
+    "recipe_stack_nbt_basis": {"const":"item_getTag_snbt_only_full_saved_stack_and_ForgeCaps_not_observed"},
+    "context": {"type":"object"}, "resource_inputs": {"type":"object"},
+    "registered_items": {"type":"array","uniqueItems":true,"items":{"$ref":"#/$defs/id"}},
+    "block_items": {"type":"object"}, "item_tags": {"$ref":"#/$defs/tags"}, "food_tags": {"$ref":"#/$defs/tags"},
+    "mods": {"type":"array"}, "foods": {"type":"array"}, "gaps": {"type":"array"},
+    "native_consumables": {"type":"array"}, "native_drink_ingredients": {"type":"array"},
+    "native_consumables_context": {"type":"object"}, "native_drink_ingredients_context": {"type":"object"},
+    "native_fd_carriers": {"type":"object"}, "native_fd_feasts": {"type":"object"},
+    "recipe_identity": {
+      "type":"object", "additionalProperties":false,
+      "required":["contract","scope","invocation_nonce","type_objects","serializer_objects"],
+      "properties": {
+        "contract":{"const":"better_cooking:recipe_identity_observation.v2"}, "scope":{"const":"one_collect_invocation_only"},
+        "invocation_nonce":{"type":"string"},
+        "type_objects":{"type":"array","items":{"$ref":"#/$defs/typeNode"}},
+        "serializer_objects":{"type":"array","items":{"$ref":"#/$defs/serializerNode"}}
+      }
+    },
+    "recipes": {"type":"array","items":{"$ref":"#/$defs/recipe"}}
+  },
+  "$defs": {
+    "id": {"type":"string","pattern":"^[a-z0-9_.-]+:[a-z0-9_./-]+$"},
+    "tags":{"type":"object","additionalProperties":{"type":"array","uniqueItems":true,"items":{"$ref":"#/$defs/id"}}},
+    "observation": {
+      "type":"object","additionalProperties":false,"required":["getter","state","ref"],
+      "properties":{"getter":{"enum":["returned_object","returned_null"]},"state":{"enum":["registered","actually_unregistered","missing","unknown"]},"ref":{"type":["string","null"]}},
+      "allOf":[{"if":{"properties":{"getter":{"const":"returned_null"}}},"then":{"properties":{"state":{"const":"missing"},"ref":{"type":"null"}}},"else":{"properties":{"state":{"enum":["registered","actually_unregistered","unknown"]},"ref":{"type":"string"}}}}]
+    },
+    "lookup": {
+      "type":"object","additionalProperties":false,"required":["outcome","key","error"],
+      "properties":{"outcome":{"enum":["key","absent","not_sampled","error"]},"key":{"type":["string","null"]},"error":{"type":["string","null"]}},
+      "allOf":[{"if":{"properties":{"outcome":{"const":"key"}}},"then":{"properties":{"key":{"$ref":"#/$defs/id"}}},"else":{"properties":{"key":{"const":null}}}},{"if":{"properties":{"outcome":{"const":"error"}}},"then":{"properties":{"error":{"type":"string","minLength":1}}},"else":{"properties":{"error":{"const":null}}}}]
+    },
+    "typeNode": {
+      "allOf":[{"$ref":"#/$defs/node"},{"properties":{
+        "ref":{"pattern":"^t(?:0|[1-9][0-9]*)$"},
+        "lookups":{"required":["builtin","forge"],"additionalProperties":false,"properties":{"builtin":{"$ref":"#/$defs/lookup"},"forge":{"$ref":"#/$defs/lookup"}}},
+        "active_binding":{"required":["builtin","forge"],"additionalProperties":false,"properties":{"builtin":{"$ref":"#/$defs/active"},"forge":{"$ref":"#/$defs/active"}}}
+      }}]
+    },
+    "serializerNode": {
+      "allOf":[{"$ref":"#/$defs/node"},{"properties":{
+        "ref":{"pattern":"^s(?:0|[1-9][0-9]*)$"},
+        "lookups":{"required":["forge"],"additionalProperties":false,"properties":{"forge":{"$ref":"#/$defs/lookup"}}},
+        "active_binding":{"required":["forge"],"additionalProperties":false,"properties":{"forge":{"$ref":"#/$defs/active"}}}
+      }}]
+    },
+    "active":{"enum":["same_object","mismatch","not_sampled"]},
+    "node": {
+      "type":"object","additionalProperties":false,"required":["ref","class","first_recipe_id","state","registered_key","lookups","active_binding"],
+      "properties":{"ref":{"type":"string"},"class":{"type":"string","minLength":1},"first_recipe_id":{"$ref":"#/$defs/id"},"state":{"enum":["registered","actually_unregistered","unknown"]},"registered_key":{"type":["string","null"]},"lookups":{"type":"object","additionalProperties":{"$ref":"#/$defs/lookup"}},"active_binding":{"type":"object","additionalProperties":{"enum":["same_object","mismatch","not_sampled"]}}},
+      "allOf":[{"if":{"properties":{"state":{"const":"registered"}}},"then":{"properties":{"registered_key":{"$ref":"#/$defs/id"}}},"else":{"properties":{"registered_key":{"const":null}}}}]
+    },
+    "stack": {
+      "type":["object","null"],"additionalProperties":false,"required":["id","count"],
+      "properties":{"id":{"$ref":"#/$defs/id"},"count":{"type":"integer","minimum":0,"maximum":2147483647},"nbt":{"type":["string","null"]},"chance":{"type":["number","null"],"minimum":0,"maximum":1}}
+    },
+    "recipe": {
+      "type":"object","additionalProperties":false,"required":["id","recipe_class","native_recipe_type","native_serializer"],
+      "properties": {
+        "id":{"$ref":"#/$defs/id"},"recipe_class":{"type":"string","minLength":1},
+        "native_recipe_type":{"allOf":[{"$ref":"#/$defs/observation"},{"properties":{"ref":{"pattern":"^t(?:0|[1-9][0-9]*)$"}}}]},"native_serializer":{"allOf":[{"$ref":"#/$defs/observation"},{"properties":{"ref":{"pattern":"^s(?:0|[1-9][0-9]*)$"}}}]},
+        "ingredients":{"type":["array","null"]},"result":{"$ref":"#/$defs/stack"},"results":{"type":["array","null"],"items":{"$ref":"#/$defs/stack"}},
+        "resource_json":{},"resource_json_context":{"type":["string","null"]},
+        "cook_ticks":{"type":["integer","null"]},"experience":{"type":["number","null"]},
+        "container":{"$ref":"#/$defs/stack"},"carrier":{},"tool":{},
+        "cut_count":{"type":["integer","null"],"minimum":0},"native_ingredient":{},"results_semantics":{"type":["string","null"]},
+        "stir_fry_count":{"type":["integer","null"],"minimum":0},"soup_base":{"type":["string","null"]},"subtype":{"type":["string","null"]},"tea_fluid":{"type":["string","null"]},
+        "ingredient_count":{"type":["integer","null"],"minimum":0},"native_output_count_constant":{"type":["integer","null"],"minimum":1}
+      }
+    }
+  }
+}

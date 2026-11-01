@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.bettercontent.bettercooking.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "better_cooking.refmap.json",
+  "mixins": [
+    "FoodStackMixin", "NativeQualityMixin", "RawDoughMixin", "NestedLunchBagMixin", "FoodBiteAccess",
+    "KitchenBoardMixin", "KitchenMatMixin", "KitchenBoardBlockMixin", "KitchenMatBlockMixin",
+    "PlacedProvenanceMixin", "FoodFinishScopeMixin", "FoodEffectMixin", "PlacedFoodDataMixin",
+    "NativeFoodBiteMixin", "NativeFoodUseMixin", "NativeLargeFoodUseMixin", "NativeFoodPlacementMixin",
+    "CropHarvestMixin", "StrawHarvestMixin",
+    "MixinNativeCuttingOutput", "MixinNativeCuttingDispenser", "MixinNativeCuttingRouting", "MixinNativeCuttingDrops",
+    "NativePotFinishMixin", "NativeStockpotFinishMixin", "NativeSteamerFinishMixin", "NativeTeaFinishMixin",
+    "PreparedRoastingSpitGuardMixin",
+    "NativeTeapotBaseCaptureMixin", "NativeStockpotBaseCaptureMixin",
+    "NativePlacedDrinkEntityMixin", "NativePlacedDrinkUseScopeMixin", "NativePlacedDrinkPlacementMixin",
+    "NativePlacedTeacupMixin", "NativePlacedMilkPickupMixin", "NativePlacedEmptyCupMixin",
+    "NativePlacedDrinkWorldMixin", "NativePlacedDrinkChunkLoadMixin",
+    "PreparedStockpotRecipeMixin", "PreparedStockpotBlockEntityMixin", "PreparedStockpotRecipeItemMixin",
+    "PreparedStockpotDropsMixin", "PreparedStockpotRemovalGuardMixin", "PreparedStockpotPlayerBreakGuardMixin"
+  ],
+  "injectors": {"defaultRequire": 1}
+}

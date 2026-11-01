@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "better_cooking:authored_decisions.v1",
+  "title": "Finite source-authored decisions; not native qualification",
+  "type": "object",
+  "required": ["schema", "source_inputs", "families", "foods", "routes"],
+  "properties": {
+    "schema": {"const": "better_cooking:authored_decisions.v1"},
+    "revision": {"type": "integer", "minimum": 1},
+    "source_inputs": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"}},
+    "families": {"type": "array", "items": {
+      "type": "object", "required": ["id", "items", "decision", "reason", "evidence"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "items": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$"}},
+        "decision": {"$ref": "#/$defs/decision"},
+        "reason": {"type": "string", "minLength": 1},
+        "evidence": {"$ref": "#/$defs/evidence"},
+        "item_evidence": {"type": "object", "additionalProperties": {"$ref": "#/$defs/evidence"}}
+      }
+    }},
+    "foods": {"type": "object", "additionalProperties": {
+      "allOf": [{"$ref": "#/$defs/decision"}, {"type": "object", "required": ["reason", "evidence"]}]
+    }},
+    "routes": {"type": "object", "additionalProperties": {
+      "type": "object", "required": ["reason", "evidence"],
+      "properties": {
+        "source_type": {"type": "string"},
+        "disposition": {"enum": ["replace", "retain_bulk", "retain_special", "retain_nonfood", "retain_distinct_apparatus", "deferred", "unresolved"]},
+        "surface": {"type": "string"}, "work_class": {"type": "string"}, "adapter": {"type": "string"},
+        "reviewed": {"type": "array", "items": {"type": "string"}},
+        "unresolved": {"type": "array", "items": {"type": "string"}},
+        "reason": {"type": "string", "minLength": 1}, "evidence": {"$ref": "#/$defs/evidence"}
+      }
+    }},
+    "acquisition": {"type": "object", "required": ["schema", "status", "harvest_redirects"],
+      "properties": {
+        "schema": {"const": "better_cooking:authored_acquisition.v1"},
+        "status": {"const": "authored_pending_native"},
+        "harvest_redirects": {"type": "object", "additionalProperties": {
+          "type": "object", "required": ["target", "source_count_multiplier", "scope", "status", "reason", "evidence"],
+          "properties": {
+            "target": {"type": "string"}, "source_count_multiplier": {"const": 1},
+            "scope": {"const": "new_native_harvest_output_only"}, "status": {"const": "authored_pending_native"},
+            "reason": {"type": "string", "minLength": 1}, "evidence": {"$ref": "#/$defs/evidence"}
+          }
+        }}
+      }
+    }
+  },
+  "$defs": {
+    "evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "decision": {
+      "type": "object",
+      "properties": {
+        "role": {"enum": ["ingredient", "staple", "meal", "drink", "special", "unresolved"]},
+        "work_class": {"enum": ["none", "straightforward", "substantial", "elaborate", "unresolved"]},
+        "adapter": {"type": "string"}, "owner": {"type": "string"},
+        "reviewed": {"type": "array", "uniqueItems": true, "items": {"enum": ["role", "work_class", "adapter", "owner", "moisture"]}},
+        "moisture": {"type": "object", "required": ["hydration", "quenching", "class"],
+          "properties": {"hydration": {"type": ["number", "null"], "minimum": 0}, "quenching": {"type": ["number", "null"], "minimum": 0}, "class": {"type": "string"}}},
+        "reason": {"type": "string", "minLength": 1}, "evidence": {"$ref": "#/$defs/evidence"}
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+[[mods]]
+modId="better_cooking_fixture"
+version="0.1.0"
+displayName="Better Cooking — nonshipping qualification fixture"
+description='''Disposable source-only discovery and native assertion harness; never ship this JAR.'''
+[[dependencies.better_cooking_fixture]]
+modId="better_cooking"
+mandatory=true
+versionRange="[0.1.0,0.1.1)"
+ordering="AFTER"
+side="BOTH"
