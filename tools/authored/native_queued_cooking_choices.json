@@ -1,0 +1,17 @@
+{
+  "schema": "better_cooking:native_cooking_choices.v1",
+  "choices": {
+    "kubejs:food_eras/creamy_fig_chicken": {
+      "source_sha256": "dc898fb3acb7a591aed8de811e5c59c89b1344a29249ceaa2940c09cc7991505",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "soup_base": "minecraft:water",
+      "reason": "Consolidate the pack-authored creamy fig chicken alternate alongside the regular fig stew. Preserve its additional milk bucket, returned bucket, three other ingredient slots, one stew portion and serving bowl; it must not remain an unexamined FD-pot alternate.",
+      "native_process_tradeoff": "Native water-base/lid/heat handling replaces FD pot handling. Milk remains a counted ingredient, not silently replaced by the base. Native station XP applies; food properties remain unchanged."
+    },
+    "kubejs:food_eras/market_fried_rice": {
+      "source_sha256": "722284819fb6882dd79c9364efd17e87092f7818a05a451d88219d39b4330704",
+      "action": "retain",
+      "reason": "Retain the distinct market formulation of pineapple fried rice with cabbage, tomato, egg and prepared beef patty. The live FD recipe requires a bowl while KC reports no serving carrier for this item; preserve that bowl cost rather than silently drop it or assign the stir-fried dish a water base."
+    }
+  }
+}

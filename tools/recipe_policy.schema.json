@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "better_cooking:recipe_policy.v1",
+  "title": "Recipe-only Cooking installation policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "enabled", "baseline_sha256", "source_identity", "catalogue", "routes", "source_recipe_hashes", "expected_sources", "definitions", "remove_ids"],
+  "properties": {
+    "schema": {"const": "better_cooking:recipe_policy.v1"},
+    "enabled": {"type": "boolean"},
+    "baseline_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "source_identity": {"type": "object"},
+    "catalogue": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["classification", "no_change", "reason"],
+        "properties": {
+          "classification": {"enum": ["ingredient", "staple", "meal", "drink", "special", "native_unchanged"]},
+          "no_change": {"type": "boolean"},
+          "reason": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "routes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["action", "reason", "source_sha256"],
+        "properties": {
+          "action": {"enum": ["retain", "redirect", "replace", "remove"]},
+          "reason": {"type": "string", "minLength": 1},
+          "source_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "definitions": {"type": "array"},
+          "canonical_recipe": {"type": "string"}
+        }
+      }
+    },
+    "source_recipe_hashes": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"}},
+    "expected_sources": {"type": "object", "additionalProperties": {"type": "object"}},
+    "definitions": {
+      "type": "array",
+      "items": {"type": "object", "required": ["id", "json"], "additionalProperties": false,
+        "properties": {"id": {"type": "string"}, "json": {"type": "object", "required": ["type"]}}}
+    },
+    "remove_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "better_cooking:native_cooking_choices.v1",
+  "choices": {
+    "farmersrespite:cooking/blazing_chili": {
+      "source_sha256": "0bb4322da1862b98c36b9c01613ec4fc63d97a9ae53356a6e61069be8a6e51e7",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Consolidate farmersrespite:blazing_chili on its native Kaleidoscope soup surface, retaining all 6 original ingredient slots and the complete output stack. Ingredient and serving remainders must match the live source facts.",
+      "native_process_tradeoff": "Native water-base/lid/heat handling replaces the FD pot. No custom preparation stages, changed food properties or physiology integration. XP uses the native station behavior.",
+      "soup_base": "minecraft:water"
+    },
+    "farmersrespite:cooking/tea_curry": {
+      "source_sha256": "38092861210114dac5ba4f71257700c4a1eb53e9e5d3d2e3ef62cc645aa6dc54",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Consolidate farmersrespite:tea_curry on its native Kaleidoscope pan-finishing surface, retaining all 6 original ingredient slots and the complete output stack. Ingredient and serving remainders must match the live source facts.",
+      "native_process_tradeoff": "Native oil/stirring/heat handling replaces the FD pot. No custom preparation stages, changed food properties or physiology integration. XP uses the native station behavior."
+    },
+    "fruitsdelight:cooking/bayberry_soup": {
+      "source_sha256": "45dc28db6b5625914b648ccd88030a493fccbd3ef0e1068927d14d1f524afa27",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Consolidate fruitsdelight:bayberry_soup on its native Kaleidoscope soup surface, retaining all 4 original ingredient slots and the complete output stack. Ingredient and serving remainders must match the live source facts.",
+      "native_process_tradeoff": "Native water-base/lid/heat handling replaces the FD pot. No custom preparation stages, changed food properties or physiology integration. XP uses the native station behavior.",
+      "soup_base": "minecraft:water"
+    },
+    "ubesdelight:farmersdelight/cooking/bangsilog_extra_from_cooking_pot": {
+      "source_sha256": "0a77cb80f497ca17961011df153612b277e17add70ee9cb7ad5e13b72f13942c",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Consolidate ubesdelight:bangsilog on its native Kaleidoscope pan-finishing surface, retaining all 3 original ingredient slots and the complete output stack. Ingredient and serving remainders must match the live source facts.",
+      "native_process_tradeoff": "Native oil/stirring/heat handling replaces the FD pot. No custom preparation stages, changed food properties or physiology integration. XP uses the native station behavior."
+    },
+    "ubesdelight:farmersdelight/cooking/bangsilog_from_cooking_pot": {
+      "source_sha256": "e5c56eee5abe4eef5b5ac391c668aa060f01d67a829e6ed0bee073deac108171",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Consolidate ubesdelight:bangsilog on its native Kaleidoscope pan-finishing surface, retaining all 3 original ingredient slots and the complete output stack. Ingredient and serving remainders must match the live source facts.",
+      "native_process_tradeoff": "Native oil/stirring/heat handling replaces the FD pot. No custom preparation stages, changed food properties or physiology integration. XP uses the native station behavior."
+    },
+    "ubesdelight:farmersdelight/cooking/lumpia_from_cooking_pot": {
+      "source_sha256": "9e454bc34928cb99f8363c44579430c331995fe00d495393a3b8a7a4387bf8ff",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Consolidate ubesdelight:lumpia on its native Kaleidoscope pan-finishing surface, retaining all 4 original ingredient slots and the complete output stack. Ingredient and serving remainders must match the live source facts.",
+      "native_process_tradeoff": "Native oil/stirring/heat handling replaces the FD pot. No custom preparation stages, changed food properties or physiology integration. XP uses the native station behavior."
+    },
+    "brewinandchewin:cooking/horror_lasagna": {
+      "source_sha256": "a3a42253a70f90dffeaad3e9d4eaf1408c93addfa3d06362aaa45cd4cd6f6e94",
+      "action": "retain",
+      "reason": "Retain the scarlet-cheese/horror-meat casserole as its native moist-heat pasta preparation, not an oil-fried dish or water-based soup; its cheese and meat predicates and served bowl stay exact."
+    },
+    "fruitsdelight:cooking/bellini_cocktail": {
+      "source_sha256": "2ca402fb0b13462c4ff9e33273339d0c8f23574b58e79d024ebeb5295ed12fde",
+      "action": "retain",
+      "reason": "Retain this sugar/ice/peach bottled cocktail formulation as a distinct beverage route. Adding a stockpot water base or oil-frying requirement would change the intended formulation."
+    },
+    "ubesdelight:farmersdelight/cooking/chicken_inasal_from_cooking_pot": {
+      "source_sha256": "82f96b059fd964b142d83c6340d3fa7145255f327fc1f5528deeeff76138704a",
+      "action": "retain",
+      "reason": "Retain native marinated chicken preparation with lemongrass and sweetener: this represents roasting, not an equivalent stir-fry or soup; do not add arbitrary oil/water or an unregistered intermediate."
+    },
+    "ubesdelight:farmersdelight/cooking/chicken_inasal_rice_from_cooking_pot": {
+      "source_sha256": "acd2068735c2e1efb7c530a4e7f6c2cafc7aef6e3351beb2f4a0c69dc5c190b3",
+      "action": "retain",
+      "reason": "Retain this plating recipe combining already-prepared chicken inasal and sinangag. It is a complementary final assembly, not an alternative raw-ingredient cooking path."
+    },
+    "ubesdelight:farmersdelight/cooking/tosilog_from_cooking_pot": {
+      "source_sha256": "e6373b65c6d08b73a2678ead99d07e4d6f5bc1ec237b6a4130dc9975ecdf386d",
+      "action": "retain",
+      "reason": "Retain this plating recipe combining prepared tocino, sinangag and cooked eggs; the constituent native pan-finishing routes are consolidated independently. Preserve the served portion and bowl."
+    }
+  }
+}

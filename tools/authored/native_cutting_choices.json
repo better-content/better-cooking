@@ -1,0 +1,135 @@
+{
+  "schema": "better_cooking:native_cutting_choices.v1",
+  "choices": {
+    "brewinandchewin:cutting/flaxen_cheese_wheel": {
+      "source_sha256": "094ddedbfb5f13f74abf53d899f8cdfcde07c67eaf4f9678b60d6a61860bc460",
+      "model_item": "brewinandchewin:flaxen_cheese_wheel",
+      "reason": "Consolidate knife preparation of brewinandchewin:flaxen_cheese_wheel on the Kaleidoscope chopping board. Preserve the exact output vector (4 brewinandchewin:flaxen_cheese_wedge), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "brewinandchewin:cutting/pizza": {
+      "source_sha256": "3887df8632a848082335c4e1b39f89c51d955f77568ef28a7cbcd7b5cc87a3c1",
+      "model_item": "brewinandchewin:pizza",
+      "reason": "Consolidate knife preparation of brewinandchewin:pizza on the Kaleidoscope chopping board. Preserve the exact output vector (4 brewinandchewin:pizza_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "brewinandchewin:cutting/quiche": {
+      "source_sha256": "1bec28cf567d9dc6d7b685dacc205ae8601a7004e555fb0df1c8eb5302642dfd",
+      "model_item": "brewinandchewin:quiche",
+      "reason": "Consolidate knife preparation of brewinandchewin:quiche on the Kaleidoscope chopping board. Preserve the exact output vector (4 brewinandchewin:quiche_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "brewinandchewin:cutting/scarlet_cheese_wheel": {
+      "source_sha256": "19b424f50a5c97da8f6434abd61cc0982c41eb9321a6c750bf4a2a7e5f7e5d4d",
+      "model_item": "brewinandchewin:scarlet_cheese_wheel",
+      "reason": "Consolidate knife preparation of brewinandchewin:scarlet_cheese_wheel on the Kaleidoscope chopping board. Preserve the exact output vector (4 brewinandchewin:scarlet_cheese_wedge), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "farmersdelight:cutting/apple_pie": {
+      "source_sha256": "4573554784407230a16bca4145826cbb1b1d26ddb6c88db4c5e52859555a57ac",
+      "model_item": "farmersdelight:apple_pie",
+      "reason": "Consolidate knife preparation of farmersdelight:apple_pie on the Kaleidoscope chopping board. Preserve the exact output vector (4 farmersdelight:apple_pie_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "farmersdelight:cutting/cabbage": {
+      "source_sha256": "d70c1ae7d29d2001b2c39ddbd76491eaf2e95537fbab4804fa9b217e290b4737",
+      "model_item": "farmersdelight:cabbage",
+      "reason": "Consolidate knife preparation of farmersdelight:cabbage on the Kaleidoscope chopping board. Preserve the exact output vector (2 farmersdelight:cabbage_leaf), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "farmersdelight:cutting/cake": {
+      "source_sha256": "4c06c9aba75fe01924f153cd4eb79e87c80c893e186fdf5a9c20a22585366ef7",
+      "model_item": "minecraft:cake",
+      "reason": "Consolidate knife preparation of minecraft:cake on the Kaleidoscope chopping board. Preserve the exact output vector (7 farmersdelight:cake_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "farmersdelight:cutting/chocolate_pie": {
+      "source_sha256": "bf616d87abc3a43c1beba5a33564e8adf0c7f7bc9e0b8c81b95255162443dc28",
+      "model_item": "farmersdelight:chocolate_pie",
+      "reason": "Consolidate knife preparation of farmersdelight:chocolate_pie on the Kaleidoscope chopping board. Preserve the exact output vector (4 farmersdelight:chocolate_pie_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "farmersdelight:cutting/ham": {
+      "source_sha256": "67f5274b842ae6aa3c15582778a4ad620fbbc460c27f508977e087c714289ad5",
+      "model_item": "farmersdelight:ham",
+      "reason": "Consolidate knife preparation of farmersdelight:ham on the Kaleidoscope chopping board. Preserve the exact output vector (2 minecraft:porkchop, 1 minecraft:bone), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "farmersdelight:cutting/kelp_roll": {
+      "source_sha256": "5d1ce5bf9b2bda18f5e9a058cc740fa90177152a6643f7e8f7c00b3d6c93d482",
+      "model_item": "farmersdelight:kelp_roll",
+      "reason": "Consolidate knife preparation of farmersdelight:kelp_roll on the Kaleidoscope chopping board. Preserve the exact output vector (3 farmersdelight:kelp_roll_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "farmersdelight:cutting/melon": {
+      "source_sha256": "999baa31e775749a2c12c2cc23b5e1046be7e6da34648946d067b5854b435c9d",
+      "model_item": "minecraft:melon",
+      "reason": "Consolidate knife preparation of minecraft:melon on the Kaleidoscope chopping board. Preserve the exact output vector (9 minecraft:melon_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "farmersdelight:cutting/pumpkin": {
+      "source_sha256": "a01ecd0a2952d516c43d91f0292a824e634578348a71690fb1c6d76c78f87d53",
+      "model_item": "minecraft:pumpkin",
+      "reason": "Consolidate knife preparation of minecraft:pumpkin on the Kaleidoscope chopping board. Preserve the exact output vector (4 farmersdelight:pumpkin_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "farmersdelight:cutting/pumpkin_pie": {
+      "source_sha256": "5c9f6f6c9b32fe95d690c9d5a876ed74662676305c8922c9d5efe104321c8d4b",
+      "model_item": "minecraft:pumpkin_pie",
+      "reason": "Consolidate knife preparation of minecraft:pumpkin_pie on the Kaleidoscope chopping board. Preserve the exact output vector (4 farmersdelight:pumpkin_pie_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "farmersdelight:cutting/smoked_ham": {
+      "source_sha256": "98a5e236264d428ebcc72c327dcdda37d64186570336ec5e88618914216ac592",
+      "model_item": "farmersdelight:smoked_ham",
+      "reason": "Consolidate knife preparation of farmersdelight:smoked_ham on the Kaleidoscope chopping board. Preserve the exact output vector (2 minecraft:cooked_porkchop, 1 minecraft:bone), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "farmersdelight:cutting/sweet_berry_cheesecake": {
+      "source_sha256": "8efbfb2176776f26568d3580b144b1d22268a28a5f5256dbc423be8a0fbd3997",
+      "model_item": "farmersdelight:sweet_berry_cheesecake",
+      "reason": "Consolidate knife preparation of farmersdelight:sweet_berry_cheesecake on the Kaleidoscope chopping board. Preserve the exact output vector (4 farmersdelight:sweet_berry_cheesecake_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "farmersrespite:cutting/coffee_cake": {
+      "source_sha256": "1a9e1a11fa48b2bd44993b4491ba065eb1af9914b4c08737ffad99ee6b53a5c4",
+      "model_item": "farmersrespite:coffee_cake",
+      "reason": "Consolidate knife preparation of farmersrespite:coffee_cake on the Kaleidoscope chopping board. Preserve the exact output vector (7 farmersrespite:coffee_cake_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "farmersrespite:cutting/rose_hip_pie": {
+      "source_sha256": "78304046b94f737974997f51b7b481edf8b6280cdf81dcf61b7ade961151e6e7",
+      "model_item": "farmersrespite:rose_hip_pie",
+      "reason": "Consolidate knife preparation of farmersrespite:rose_hip_pie on the Kaleidoscope chopping board. Preserve the exact output vector (4 farmersrespite:rose_hip_pie_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "fruitsdelight:cutting/fig_pudding": {
+      "source_sha256": "3ed60391461fbfde14d995d1eccfd8b1482c0de3ceb0fdab628e06dba90dc71a",
+      "model_item": "fruitsdelight:fig_pudding",
+      "reason": "Consolidate knife preparation of fruitsdelight:fig_pudding on the Kaleidoscope chopping board. Preserve the exact output vector (4 fruitsdelight:fig_pudding_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "fruitsdelight:cutting/hamimelon": {
+      "source_sha256": "d5960bd0bcc98e2c423672e8abc10d04af0816f38479cce6ab98123aa397a7c4",
+      "model_item": "fruitsdelight:hamimelon",
+      "reason": "Consolidate knife preparation of fruitsdelight:hamimelon on the Kaleidoscope chopping board. Preserve the exact output vector (9 fruitsdelight:hamimelon_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "fruitsdelight:cutting/lemon": {
+      "source_sha256": "bbc1d3db043bef70e0e5ea915732aa05fbab0e07ad07507dbe689ba8de6dd5b8",
+      "model_item": "fruitsdelight:lemon",
+      "reason": "Consolidate knife preparation of fruitsdelight:lemon on the Kaleidoscope chopping board. Preserve the exact output vector (4 fruitsdelight:lemon_slice, 1 fruitsdelight:lemon_seeds), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "fruitsdelight:cutting/orange": {
+      "source_sha256": "bd3a49a435970f804c9552aa45fa939bf21815b267f145f71a67afd65eab86fc",
+      "model_item": "fruitsdelight:orange",
+      "reason": "Consolidate knife preparation of fruitsdelight:orange on the Kaleidoscope chopping board. Preserve the exact output vector (4 fruitsdelight:orange_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "ubesdelight:farmersdelight/cutting/garlic": {
+      "source_sha256": "1ea8f43acfe996c3417817012a4c3163e7156d65dc7249fb7b751d94994675f1",
+      "model_item": "ubesdelight:garlic",
+      "reason": "Consolidate knife preparation of ubesdelight:garlic on the Kaleidoscope chopping board. Preserve the exact output vector (2 ubesdelight:garlic_chop), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "ubesdelight:farmersdelight/cutting/ginger": {
+      "source_sha256": "6f65e7a601b9a7ff40313b9803ec827ce00a2f22e4aa7e5a012c12dc2097a4c8",
+      "model_item": "ubesdelight:ginger",
+      "reason": "Consolidate knife preparation of ubesdelight:ginger on the Kaleidoscope chopping board. Preserve the exact output vector (2 ubesdelight:ginger_chop), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "ubesdelight:farmersdelight/cutting/halo_halo_from_halo_halo_feast_from_cutting": {
+      "source_sha256": "e10c883ee25776ed058ee684ee1b9b4dee64ff7768d8d223f2152c0030eecdb5",
+      "model_item": "ubesdelight:halo_halo_feast",
+      "reason": "Consolidate knife preparation of ubesdelight:halo_halo_feast on the Kaleidoscope chopping board. Preserve the exact output vector (4 ubesdelight:halo_halo), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "ubesdelight:farmersdelight/cutting/leche_flan_from_leche_flan_feast_from_cutting": {
+      "source_sha256": "7458bdaaffe1a6d503225f70a05890c8d67a044543ec911aecfef03ef4b31f04",
+      "model_item": "ubesdelight:leche_flan_feast",
+      "reason": "Consolidate knife preparation of ubesdelight:leche_flan_feast on the Kaleidoscope chopping board. Preserve the exact output vector (5 ubesdelight:leche_flan), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    },
+    "ubesdelight:farmersdelight/cutting/ube_cake_slice_from_ube_cake_from_cutting": {
+      "source_sha256": "e698fb3e8bb8393db7e1f58c599f1db3fecefbffd040fd2f6d2103f06dfa04d1",
+      "model_item": "ubesdelight:ube_cake",
+      "reason": "Consolidate knife preparation of ubesdelight:ube_cake on the Kaleidoscope chopping board. Preserve the exact output vector (7 ubesdelight:ube_cake_slice), including nonfood by-products; this input has no competing native KC chopping recipe. Keep registered source/output items and cultivated acquisition unchanged."
+    }
+  }
+}

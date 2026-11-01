@@ -1,0 +1,232 @@
+{
+  "schema": "better_cooking:native_cooking_choices.v1",
+  "choices": {
+    "farmersdelight:cooking/baked_cod_stew": {
+      "source_sha256": "f62deddbd8ce03e2184bd22774d6c2dc4390a1fd5c791d2f74c29353465269f5",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make farmersdelight:baked_cod_stew a native Kaleidoscope soup/stew route. Keep 4 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "farmersdelight:cooking/beef_stew": {
+      "source_sha256": "f99311d397207eaa8437bb1e828c58addd2e44909cfec497955af81bb9cdbcb9",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make farmersdelight:beef_stew a native Kaleidoscope soup/stew route. Keep 3 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "farmersdelight:cooking/beetroot_soup": {
+      "source_sha256": "64de911ffb05e409099521add7d3b5b7dab61b2d6174b8a657441fccac14b36f",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make minecraft:beetroot_soup a native Kaleidoscope soup/stew route. Keep 3 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "farmersdelight:cooking/bone_broth": {
+      "source_sha256": "1b45250bb6b6cf11af700a0b8da5b40e14ae566d86d3aac4e617e4514c4b96ac",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make farmersdelight:bone_broth a native Kaleidoscope soup/stew route. Keep 2 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "farmersdelight:cooking/chicken_soup": {
+      "source_sha256": "bec1e9b8fc8af30380b5e96d8f886dbf3836a37ff27c4f7fbab580063349b54b",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make farmersdelight:chicken_soup a native Kaleidoscope soup/stew route. Keep 4 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "farmersdelight:cooking/fish_stew": {
+      "source_sha256": "3c6ae720c74cbf840c12ca6fa1f8defce80bdd4f28c84e5ea752a25b3661144c",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make farmersdelight:fish_stew a native Kaleidoscope soup/stew route. Keep 3 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "farmersdelight:cooking/mushroom_stew": {
+      "source_sha256": "625ad5936e951ced4b68ed0e39743e89a37c7d6b4b0fca9067b6a68aa4c00753",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make minecraft:mushroom_stew a native Kaleidoscope soup/stew route. Keep 2 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "farmersdelight:cooking/noodle_soup": {
+      "source_sha256": "7e2d4061dc0808a57d55c615da4cd4520da2316c33b382901aef4dd320ba5178",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make farmersdelight:noodle_soup a native Kaleidoscope soup/stew route. Keep 4 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "farmersdelight:cooking/onion_soup": {
+      "source_sha256": "71202ce8cd7e6d391987f8103d7489ceaa0474ff7bc2dcb00219b94a40ab9da2",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make farmersdelight:onion_soup a native Kaleidoscope soup/stew route. Keep 4 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "farmersdelight:cooking/pumpkin_soup": {
+      "source_sha256": "b56bd8f74ace5459fe4599944c4c3dec509eb2259f6d37a55d8362bcc24c9733",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make farmersdelight:pumpkin_soup a native Kaleidoscope soup/stew route. Keep 4 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "farmersdelight:cooking/rabbit_stew": {
+      "source_sha256": "c3d63b1a29c5d082a0211aba4b158e40aa536979456130612b2f1f9e4807b22d",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make minecraft:rabbit_stew a native Kaleidoscope soup/stew route. Keep 4 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "farmersdelight:cooking/turtle_soup": {
+      "source_sha256": "0cfa967d59057ff4b9466b3bcb3825b1f16a63b1624aae2d20d5cd5a5d441ee3",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make untamedwilds:food_turtle_soup a native Kaleidoscope soup/stew route. Keep 3 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "farmersdelight:cooking/vegetable_soup": {
+      "source_sha256": "83310d148ef0c13957285212b57b9b238891c33804552a8b517c8bce426b87ab",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make farmersdelight:vegetable_soup a native Kaleidoscope soup/stew route. Keep 4 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "brewinandchewin:cooking/creamy_onion_soup": {
+      "source_sha256": "9ed98b37632748481f1b7627992892cf57163a26a759a26b62e5ba0ddff95dd6",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make brewinandchewin:creamy_onion_soup a native Kaleidoscope soup/stew route. Keep 4 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "fruitsdelight:cooking/fig_chicken_stew": {
+      "source_sha256": "1179866f2151a39a6afa4c7c87ddfdb5a1fd65cc87de09f6b5fd7c7119b6a2fa",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make fruitsdelight:fig_chicken_stew a native Kaleidoscope soup/stew route. Keep 3 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "ubesdelight:farmersdelight/cooking/arroz_caldo_from_cooking_pot": {
+      "source_sha256": "f7a0b5ad9254c1a5644a73a44e906227cfef52420259ca85832de6f949b3b3d1",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make ubesdelight:arroz_caldo a native Kaleidoscope soup/stew route. Keep 6 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "ubesdelight:farmersdelight/cooking/bulalo_from_cooking_pot": {
+      "source_sha256": "b66d4f0e4938690d797a61939ec16c0ba397af5a52c4839e0fcfac6b2a56963d",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make ubesdelight:bulalo a native Kaleidoscope soup/stew route. Keep 6 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "ubesdelight:farmersdelight/cooking/mechado_from_cooking_pot": {
+      "source_sha256": "6e00c052ee0b29b7de7388f386c2112e8632559b9673c395a7a9aaed8c051326",
+      "serializer": "kaleidoscope_cookery:stockpot",
+      "reason": "Make ubesdelight:mechado a native Kaleidoscope soup/stew route. Keep 6 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native water soup base, lid and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change.",
+      "soup_base": "minecraft:water"
+    },
+    "farmersdelight:cooking/fried_rice": {
+      "source_sha256": "fcb3a8f4316382978e054c7126ab27f2b0a22fd6f28a2f266329f086fbe9fd82",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make farmersdelight:fried_rice a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 4 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "farmersdelight:cooking/mushroom_rice": {
+      "source_sha256": "aa46ad3fd29fa103ee238e65f06ff5595a89cc0d745b33a19eb6a3b9aee9b6b0",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make farmersdelight:mushroom_rice a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 4 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "farmersdelight:cooking/pasta_with_meatballs": {
+      "source_sha256": "16fab9cdd4d523acd15ad95bb06a191478c5274cc6633e6b0f0f28c0092d99fc",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make farmersdelight:pasta_with_meatballs a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 3 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "farmersdelight:cooking/pasta_with_mutton_chop": {
+      "source_sha256": "695d3704daf26c4e0eded6cae2eed145056da1f3b05a17afad609b374d2be38a",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make farmersdelight:pasta_with_mutton_chop a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 3 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "farmersdelight:cooking/ratatouille": {
+      "source_sha256": "42546f6fb07611c57dad4c04c74220372c9a703aae88f38ca4465e87ac8261be",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make farmersdelight:ratatouille a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 4 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "farmersdelight:cooking/squid_ink_pasta": {
+      "source_sha256": "af175e2dff40c98da670fb4dce0c4e90bf12ea511f74df1c64b0485c78b15459",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make farmersdelight:squid_ink_pasta a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 4 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "farmersdelight:cooking/vegetable_noodles": {
+      "source_sha256": "d07584a26c435e91441b8756401786282de1332d5c69c601377873eb320f3618",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make farmersdelight:vegetable_noodles a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 5 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "brewinandchewin:cooking/cheesy_pasta": {
+      "source_sha256": "59c4abda3a04e339f418438461a0cd951caa17ce723cc13d5915ec67671296ae",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make brewinandchewin:cheesy_pasta a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 4 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "brewinandchewin:cooking/vegetable_omelet": {
+      "source_sha256": "4f1553ef819e74ad69ab6f2db0f4376037be5aba090f8292c473dc4867a31904",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make brewinandchewin:vegetable_omelet a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 5 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "fruitsdelight:cooking/lychee_chicken": {
+      "source_sha256": "8fd843f51027f1d39c00919f9c577f4c7dce3d4aac988c1c0f4a055c3752723a",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make fruitsdelight:lychee_chicken a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 6 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "fruitsdelight:cooking/orange_chicken": {
+      "source_sha256": "27df2836b640e296bbfbd305e8989a05692ed2adce7efe7bbb053c42adbda0ab",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make fruitsdelight:orange_chicken a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 6 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "fruitsdelight:cooking/orange_marinated_pork": {
+      "source_sha256": "2ad2f03a14606ca78090ce545e9d95d78971bad063155a11e9e1299e944f29a0",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make fruitsdelight:orange_marinated_pork a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 6 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "fruitsdelight:cooking/pineapple_fried_rice": {
+      "source_sha256": "d9bfabd4a5b6f07f4daa0f6c73c6af26071d79ba2e53c2547ac39a87884faf3f",
+      "action": "retain",
+      "reason": "Retain this exact pineapple fried-rice formulation: live FD getOutputContainer requires one bowl, while native KC ItemUtils reports air for this output. A stir-fry conversion would erase its bowl cost; assigning a water stockpot would change the process, and adding an output-container tag could affect downstream ingredient returns. Preserve the native FD recipe rather than silently change those semantics."
+    },
+    "fruitsdelight:cooking/pineapple_marinated_pork": {
+      "source_sha256": "7fbba0d3b889bbec0938634d7fcdd46dcd800402829cb15267a9fd330b6be1b9",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make fruitsdelight:pineapple_marinated_pork a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 6 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "ubesdelight:farmersdelight/cooking/sinangag_from_cooking_pot": {
+      "source_sha256": "83b42c195e29aeda4bfa3e187621f8a648add71fbb370b0f3c956ae2dbeb8f72",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make ubesdelight:sinangag a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 2 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "ubesdelight:farmersdelight/cooking/sisig_from_cooking_pot": {
+      "source_sha256": "734cee3f5a276d506cb5bf6c5e9e5a1ba86e4e4c9fbdc4c25a6ea03d8b74062b",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make ubesdelight:sisig a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 5 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    },
+    "ubesdelight:farmersdelight/cooking/tocino_from_cooking_pot": {
+      "source_sha256": "9ecae6c9e4e9741b4a44bde002c06e168bd1f7fc437dac277b9c9f71fdb441e6",
+      "serializer": "kaleidoscope_cookery:pot",
+      "reason": "Make ubesdelight:tocino a native Kaleidoscope stir-fried or sauce-finished meal route. Keep 4 source ingredient slots, their exact alternatives, and 1 output portion(s). Bind serving and ingredient containers to the live FD/KC facts, not item-name inference.",
+      "native_process_tradeoff": "Native oil, stirring and heat replaces FD pot handling. This is an explicit existing-station requirement, not a new preparation serializer. Recipe XP follows the chosen native station; no food-property or physiology change."
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "better_cooking:recipe_catalogue_roles.v1",
+  "scope": "Recipe catalogue roles only; no food-property, intake, hydration or quality changes.",
+  "groups": [
+    {
+      "classification": "ingredient",
+      "reason": "Retain native gathered or basic culinary material; recipe role does not alter edibility or effects.",
+      "items": ["aether:blue_berry", "better_spicy_farmers:chilli", "better_spicy_farmers:green_chilli", "better_spicy_farmers:horseradish", "better_spicy_farmers:mustard_leaves", "better_spicy_farmers:wasabi", "better_spicy_farmers:wasabi_leaves", "cataclysm:amethyst_crab_meat", "cataclysm:lionfish", "create:bar_of_chocolate", "farmersrespite:coffee_berries", "hexerei:belladonna_berries", "hexerei:tallow_impurity", "natures_spirit:coconut_half", "natures_spirit:desert_turnip", "natures_spirit:olives", "quark:ancient_fruit", "quark:crab_leg", "rats:ratfish", "rats:treacle", "the_bumblezone:honey_crystal_shards", "twilightforest:torchberries", "untamedwilds:food_aardvark_cucumber", "untamedwilds:material_blubber", "untamedwilds:material_fat"]
+    },
+    {
+      "classification": "staple",
+      "reason": "Retain accessible native basic food or distinct preserved/dairy product; existing drying and aging remain unchanged.",
+      "items": ["better_industrial_heat:dried_beef", "better_industrial_heat:dried_chicken", "better_industrial_heat:dried_cod", "better_industrial_heat:dried_mutton", "better_industrial_heat:dried_porkchop", "better_industrial_heat:dried_rabbit", "better_industrial_heat:dried_salmon", "fallout_wastelands_:cram", "fallout_wastelands_:iguana_on_stick", "fallout_wastelands_:instamash", "fallout_wastelands_:potato_crisps", "fallout_wastelands_:sugar_bombs", "pneumaticcraft:sourdough_bread", "rats:blue_cheese", "rats:nether_cheese", "rats:string_cheese", "twilightforest:hydra_chop", "twilightforest:maze_wafer", "untamedwilds:food_bear_cooked", "untamedwilds:food_hakarl", "untamedwilds:food_pachyderm_cooked", "untamedwilds:food_turtle_cooked", "upgrade_aquatic:boiled_pickerelweed"]
+    },
+    {
+      "classification": "meal",
+      "reason": "Finished prepared food or confection; resolve recipe alternatives independently while preserving native item properties.",
+      "items": ["aether:blue_gummy_swet", "aether:candy_cane", "aether:gingerbread_man", "aether:golden_gummy_swet", "create:chocolate_glazed_berries", "create:honeyed_apple", "create:sweet_roll", "fallout_wastelands_:chicago_omelette", "iceandfire:cannoli", "natures_spirit:half_pizza", "natures_spirit:quarter_pizza", "natures_spirit:three_quarters_pizza", "rats:confit_byaldi", "rats:potato_knishes", "twilightforest:experiment_115", "twilightforest:meef_stroganoff"]
+    },
+    {
+      "classification": "drink",
+      "reason": "Retain native beverage or bottled consumable; no new intake profile, dosing or vessel rules.",
+      "items": ["farmersrespite:long_purulent_tea", "farmersrespite:purulent_tea", "farmersrespite:strong_purulent_tea", "hexerei:blood_bottle", "hexerei:lava_bottle", "hexerei:quicksilver_bottle", "hexerei:tallow_bottle", "the_bumblezone:royal_jelly_bottle"]
+    },
+    {
+      "classification": "special",
+      "reason": "Keep native utility, magical, harmful or unusual food behavior; an edible registry entry is not an ordinary meal rebalance instruction.",
+      "items": ["aether:enchanted_berry", "aether:healing_stone", "aether:white_apple", "artifacts:eternal_steak", "artifacts:everlasting_beef", "artifacts:onion_ring", "better_industrial_heat:spoiled_meat", "better_industrial_heat:spoiled_produce", "born_in_chaos_v1:eternal_candy", "cataclysm:blessed_amethyst_crab_meat", "cold_sweat:soul_sprout", "dynamictreesplus:saguaro_cactus_seed", "everythingcopper:copper_nugget", "hexerei:packing_peanut", "iceandfire:ambrosia", "iceandfire:fire_dragon_flesh", "iceandfire:ice_dragon_flesh", "iceandfire:lightning_dragon_flesh", "iceandfire:pixie_dust", "immersive_weathering:azalea_flowers", "immersive_weathering:enchanted_golden_moss_clump", "immersive_weathering:ice_sickle", "immersive_weathering:icicle", "immersive_weathering:moss_clump", "rats:contaminated_food", "tconstruct:jeweled_apple", "the_deep_void:call_upon_the_hive", "the_deep_void:knightfish", "the_deep_void:voodoo_doll", "undergarden:blood_globule", "undergarden:goo_ball"]
+    }
+  ]
+}
