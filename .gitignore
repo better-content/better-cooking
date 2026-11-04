@@ -9,3 +9,5 @@ __pycache__/
 /logs/
 /tools/reports/
 /tools/authored/review-drafts/
+# Locally cached binaries; Packwiz metadata/hashes remain tracked separately.
+/gradle/wrapper/gradle-wrapper.jar
