@@ -110,10 +110,19 @@ public final class CookingRuntime {
         return CookingAgeApi.transfer(List.of(new CookingAgeApi.Input(original,FoodThermalService.Storage.AMBIENT)),result,gameTime);
     }
     private static Map<String,Double> ordinary(Map<String,Double> values) {
-        Set<String> groups=Set.of("proteins","grains","fruits","fats","dairy","vegetables");Map<String,Double> result=new TreeMap<>();
-        values.forEach((group,value)->{if(groups.contains(group))result.put(group,value);});return result;
+        Set<String> groups=Set.of("proteins","grains","fruits","vegetables","dairy");Map<String,Double> result=new TreeMap<>();
+        values.forEach((group,value)->{
+            if(!groups.contains(group))throw new IllegalArgumentException("Unsupported Diet nutrient: "+group);
+            result.put(group,value);
+        });return result;
     }
     public static ItemStack finishPreparation(PreparationRecipe recipe,List<ItemStack> paid,ServerLevel level) {
+        return finishPreparation(recipe,paid,level,null);
+    }
+    public static ItemStack finishPreparation(PreparationRecipe recipe,List<ItemStack> paid,net.minecraft.server.level.ServerPlayer player) {
+        return finishPreparation(recipe,paid,player.serverLevel(),player);
+    }
+    private static ItemStack finishPreparation(PreparationRecipe recipe,List<ItemStack> paid,ServerLevel level,net.minecraft.server.level.ServerPlayer player) {
         if(!recipe.acceptsPaid(paid)) throw new IllegalArgumentException("Unpaid or incompatible culinary preparation");
         ItemStack output=recipe.getResultItem(level.registryAccess());
         FoodProfile profile=profile(output); if(profile==null||!profile.resolved()) throw new IllegalStateException("Unresolved culinary output "+output);
@@ -124,7 +133,18 @@ public final class CookingRuntime {
             ItemStack input=ingredient.copy(); FoodThermalService.INSTANCE.settle(input,FoodThermalService.Storage.AMBIENT,level.getGameTime()); settled.add(input);
             CompoundTag data=input.hasTag()?input.getTag().getCompound(SERVING):new CompoundTag();
             FoodProfile raw=profile(input);
-            Map<String,Double> vector=data.contains("nutrients")?readVector(data.getCompound("nutrients")):raw==null?Map.of():ordinary(raw.nutrients());
+            Map<String,Double> vector;
+            if(data.contains("nutrients")) vector=readVector(data.getCompound("nutrients"));
+            else if(raw!=null&&!raw.nutrients().isEmpty()) vector=ordinary(raw.nutrients());
+            else if(player!=null&&input.isEdible()) {
+                var potential=ConsumableProfiles.dietGains(player,input)
+                        .orElseThrow(()->new IllegalStateException("Diet ingredient gains unavailable: "+input));
+                if(potential.containsKey("fats")) throw new IllegalStateException("Removed Diet Fats group in ingredient: "+input);
+                Map<String,Double> supported=new TreeMap<>();
+                for(String group:List.of("proteins","grains","fruits","vegetables","dairy"))
+                    if(potential.containsKey(group))supported.put(group,potential.get(group));
+                vector=Map.copyOf(supported);
+            } else vector=raw==null?Map.of():ordinary(raw.nutrients());
             double parts=portionCount(input),metadataParts=ediblePortions(input),vectorParts=data.contains("nutrients")?metadataParts:parts;
             vector.forEach((group,value)->base.merge(group,value*vectorParts*input.getCount()/recipe.servings(),Double::sum));
             Map<String,Double> wholeVector=scaledVector(vector,vectorParts);
@@ -293,7 +313,11 @@ public final class CookingRuntime {
         for(int slot=0;slot<inputs.getContainerSize();slot++) if(inputs.getItem(slot).is(CookingItems.PREPARED_BATCH.get())) return finishFromPrepared(inputs.getItem(slot),output);
         return output;
     }
-    private static Map<String,Double> readVector(CompoundTag tag) { Map<String,Double> values=new TreeMap<>();for(String key:tag.getAllKeys())values.put(key,bounded(tag.getDouble(key),100));return values; }
+    private static Map<String,Double> readVector(CompoundTag tag) { Map<String,Double> values=new TreeMap<>();for(String key:tag.getAllKeys()){
+        if(!Set.of("proteins","grains","fruits","vegetables","dairy").contains(key))
+            throw new IllegalArgumentException("Unsupported Diet serving nutrient: "+key);
+        values.put(key,bounded(tag.getDouble(key),100));
+    }return values; }
     private static CompoundTag writeVector(Map<String,Double> values) { CompoundTag tag=new CompoundTag();values.forEach(tag::putDouble);return tag; }
     private static double bounded(double value,double max) { if(!Double.isFinite(value)||value<0||value>max)throw new IllegalArgumentException("Invalid culinary serving data");return value; }
 }

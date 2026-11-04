@@ -13,7 +13,7 @@ import java.util.*;
 /** Immutable facts captured at actual native insertion; finish never needs an online actor. */
 public final class NativeDrinkIngredients {
     public static final String KEY="better_cooking:native_drink_ingredients";
-    private static final Set<String> ORDINARY=Set.of("proteins","grains","fruits","fats","dairy","vegetables");
+    private static final Set<String> ORDINARY=Set.of("proteins","grains","fruits","vegetables","dairy");
     private static final NativeDrinkFactBinding<CompoundTag> DEFAULTS=new NativeDrinkFactBinding<>();
     private NativeDrinkIngredients() {}
     public static boolean connected(LivingEntity actor){

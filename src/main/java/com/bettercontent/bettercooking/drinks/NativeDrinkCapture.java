@@ -18,7 +18,7 @@ import java.util.*;
 /** Pure snapshots of actual inputs. Never calls Check/Sip, reserve debit or a tracker mutation. */
 public final class NativeDrinkCapture {
     public static final String BASE_KEY="better_cooking:native_drink_base";
-    private static final Set<String> ORDINARY=Set.of("proteins","grains","fruits","fats","dairy","vegetables");
+    private static final Set<String> ORDINARY=Set.of("proteins","grains","fruits","vegetables","dairy");
     private NativeDrinkCapture() {}
 
     public static CompoundTag base(LivingEntity actor,ItemStack actual,String fluid) {
@@ -65,9 +65,9 @@ public final class NativeDrinkCapture {
             if(!snapshot.contains("diet",Tag.TAG_COMPOUND)||!snapshot.contains("sugar",Tag.TAG_DOUBLE)||!snapshot.contains("alcohol",Tag.TAG_DOUBLE))
                 throw new IllegalStateException("Missing typed milk profile listener");
             CompoundTag diet=snapshot.getCompound("diet");
-            // The exact milk branch supplies physiology's .06 dairy/.06 fats. Do not generalize
+            // The exact milk branch supplies physiology's .06 dairy. Do not generalize
             // this event to unknown ingredients: its generic branch has a legacy zero fallback.
-            if(!diet.contains("dairy",Tag.TAG_ANY_NUMERIC)||!diet.contains("fats",Tag.TAG_ANY_NUMERIC))
+            if(!diet.contains("dairy",Tag.TAG_ANY_NUMERIC)||diet.contains("fats",Tag.TAG_ANY_NUMERIC))
                 throw new IllegalStateException("Missing explicit milk nutrition");
             for(String key:ORDINARY)if(diet.contains(key,Tag.TAG_ANY_NUMERIC))nutrients.putDouble(key,checked(diet.getDouble(key)));
             sugar=checked(snapshot.getDouble("sugar"));alcohol=checked(snapshot.getDouble("alcohol"));

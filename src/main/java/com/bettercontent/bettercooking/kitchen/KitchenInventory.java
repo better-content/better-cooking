@@ -102,7 +102,7 @@ public final class KitchenInventory extends ItemStackHandler implements Containe
         }
         if (progress.finished(recipe.stages()) && preparing() && getStackInSlot(9).isEmpty() && valid(player)) {
             List<ItemStack> originals = paid.stream().map(ItemStack::copy).toList();
-            ItemStack result = CookingRuntime.finishPreparation(recipe, originals, player.serverLevel());
+            ItemStack result = CookingRuntime.finishPreparation(recipe, originals, player);
             if (!result.isEmpty()) {
                 List<ItemStack> remainders = CookingRuntime.remainders(originals);
                 // Commit output and retire paid provenance before exposing any remainder.

@@ -12,7 +12,7 @@ import java.util.*;
 /** Pure closed projection verifier. Root owns physical CURRENT byte-domain and connection proof.
  * No I/O, native registries, installation, player, effects, resource lookup or fabricated defaults. */
 public final class NativeDrinkAttestation {
-    private static final Set<String> GROUPS=Set.of("proteins","grains","fruits","fats","dairy","vegetables");
+    private static final Set<String> GROUPS=Set.of("proteins","grains","fruits","vegetables","dairy");
     private static final Set<String> DOSES=Set.of("complete","nutrients","sugar","alcohol","spice");
     private NativeDrinkAttestation() {}
     public static final class Validated {
