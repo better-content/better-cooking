@@ -2,6 +2,7 @@
   "item.better_cooking.prepared_batch": "Prepared ingredients",
   "item.better_cooking.prepared_named": "Prepared %s",
   "recipe.category.better_cooking.preparation": "Kitchen preparation",
+  "emi.category.better_cooking.native_cutting": "Native cutting",
   "container.better_cooking.kitchen": "Kitchen preparation",
   "better_cooking.action.cut": "Cut",
   "better_cooking.action.mix": "Mix",
