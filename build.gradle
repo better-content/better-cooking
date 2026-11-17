@@ -128,6 +128,13 @@ tasks.withType(JavaCompile).configureEach {
     // Namespace changes must not leave stale split-package fixture classes in the next JAR.
     options.incremental = false
 }
+// SOURCE-ONLY cross-mod compilation during the five-group change: do not build or bind
+// a new Physiology JAR just to make Cooking see its new typed canonical API.
+def physiologySourceClasses = providers.gradleProperty('physiologyCompileClasses').orNull
+if (physiologySourceClasses != null) {
+    if (!file(physiologySourceClasses).isDirectory()) throw new GradleException('Missing physiologyCompileClasses directory')
+    tasks.withType(JavaCompile).configureEach { classpath = files(physiologySourceClasses) + classpath }
+}
 tasks.withType(Test).configureEach {
     useJUnitPlatform(); maxParallelForks = 1
     // The 7.8MB complete culinary fixture exceeds Gradle's 512MiB default test-worker heap.

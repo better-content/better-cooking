@@ -66,9 +66,20 @@ public final class NativeDrinkAttestationTest {
         malformed(r->row(r).getAsJsonObject("paid_intake").addProperty("sugar","0"));
         malformed(r->row(r).getAsJsonObject("paid_intake").addProperty("alcohol",-1));
         malformed(r->row(r).getAsJsonObject("paid_intake").addProperty("spice",10001));
-        malformed(r->row(r).getAsJsonObject("paid_intake").getAsJsonObject("nutrients").addProperty("spice",0));
+        malformed(r->row(r).getAsJsonObject("paid_intake").getAsJsonObject("nutrients").addProperty("grains",0));
         malformed(r->row(r).getAsJsonObject("paid_intake").add("nutrients",JsonNull.INSTANCE));
         malformed(r->row(r).getAsJsonObject("paid_intake").addProperty("complete","true"));
+    }
+    @Test void canonicalMilkAtAlternateConfiguredSplitIsAnAcceptedPaidVector(){
+        JsonObject r=raw(), milk=row(r);
+        milk.addProperty("id","minecraft:milk_bucket");
+        milk.addProperty("template_basis","native_default");
+        milk.addProperty("input_template","{Count:1b,id:\"minecraft:milk_bucket\"}");
+        JsonObject nutrients=milk.getAsJsonObject("paid_intake").getAsJsonObject("nutrients");
+        nutrients.addProperty("proteins",.036);nutrients.addProperty("carbs",.024);
+        nutrients.addProperty("vegetables",0);nutrients.addProperty("spice",0);nutrients.addProperty("alcohol",0);
+        byte[] b=bytes(r);assertDoesNotThrow(()->NativeDrinkAttestation.verify(b,manifest(b,r),CURRENT));
+        malformed(m->row(m).getAsJsonObject("paid_intake").getAsJsonObject("nutrients").addProperty("dairy",.06));
     }
     @Test void incompleteRemainsNullNotZeroAndMustMatchReason(){
         JsonObject r=raw(),paid=row(r).getAsJsonObject("paid_intake");paid.addProperty("complete",false);paid.addProperty("reason","actual API unavailable");for(String k:new String[]{"nutrients","sugar","alcohol","spice"})paid.add(k,JsonNull.INSTANCE);

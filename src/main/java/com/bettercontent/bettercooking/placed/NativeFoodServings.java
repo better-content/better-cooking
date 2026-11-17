@@ -107,9 +107,12 @@ public final class NativeFoodServings {
                     BlockState after = level.getBlockState(anchor);
                     if (after.getBlock() != before.getBlock() || remaining(after) != remaining - 1)
                         throw new IllegalStateException("KC successful bite did not debit one native portion");
+                    // A distinct committed native block-state transition owns this identity;
+                    // never use item ID, stack NBT or game tick to merge two paid bites.
+                    Object committedUse = new Object();
                     PlacedFoodAdapters.completed(level, anchor, before);
                     if (player instanceof ServerPlayer real && !(real instanceof FakePlayer) && real.connection != null)
-                        CulinaryConsumption.complete(real, portion);
+                        CulinaryConsumption.complete(real, portion, committedUse);
                 }
                 return result;
             }));

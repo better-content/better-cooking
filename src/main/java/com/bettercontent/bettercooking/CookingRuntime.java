@@ -6,6 +6,7 @@ import com.bettercontent.betterindustrialheat.api.CookingAgeApi;
 import com.bettercontent.betterindustrialheat.food.FoodThermalService;
 import com.bettercontent.betterspicyfarmers.api.SpiceApi;
 import com.bettercontent.bettersurvivalphysiology.metabolism.ConsumableProfiles;
+import com.bettercontent.bettersurvivalphysiology.nutrition.ServingVectors;
 import com.github.ysbbbbbb.kaleidoscopecookery.item.quality.QualityEvaluator;
 import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
@@ -18,6 +19,8 @@ import java.util.*;
 /** Committed recipe-state and unscaled ingredient provenance; no personal skill or work-point balance. */
 public final class CookingRuntime {
     public static final String PREP="better_cooking:preparation", SERVING="better_cooking:serving", QUALITY="kaleidoscope_cookery:quality";
+    /** Persisted typed boundary: canonical food data is never accepted by the SOURCE mapper. */
+    public static final String VECTOR_TYPE="vector_type", CANONICAL_FIVE="canonical_five";
     private CookingRuntime() {}
     public static FoodProfile profile(ItemStack stack) {
         var key=ForgeRegistries.ITEMS.getKey(stack.getItem()); if(key==null) return null;
@@ -73,7 +76,9 @@ public final class CookingRuntime {
             var captured=com.bettercontent.bettercooking.drinks.NativeDrinkProvenance.resolve(stack);
             if(captured.isEmpty())return Optional.empty(); // New partial/unpaid receipts are never legacy zero servings.
             var dose=captured.get();
-            ServingProfile resolved=ServingProfile.resolve(food,quality,dose.nutrients(),dose.sugar(),dose.alcohol(),dose.spice()+sauceSpice(stack));
+            Map<String,Double> canonical=new ServingVectors.CanonicalServing(dose.nutrients())
+                    .resolveNativeMirrors(dose.sugar(),dose.alcohol()).gains();
+            ServingProfile resolved=ServingProfile.resolve(food,quality,canonical,dose.sugar(),dose.alcohol(),dose.spice()+sauceSpice(stack));
             return Optional.of(new ServingProfile(resolved.itemId(),quality,resolved.hunger(),resolved.saturationModifier(),
                     resolved.baseNutrients(),resolved.nutrients(),dose.hydration(),dose.quenching(),
                     dose.sugar(),dose.alcohol(),dose.spice()+sauceSpice(stack)).forPortions(portionCount(stack)));
@@ -83,7 +88,11 @@ public final class CookingRuntime {
         double sugar=data.contains("sugar")?data.getDouble("sugar")*metadataBasis:nativeSugar(stack,food,whole)/perItem;
         double alcohol=data.contains("alcohol")?data.getDouble("alcohol")*metadataBasis:nativeAlcohol(stack,food)/perItem;
         double portions=portionCount(stack),actualSpice=SpiceApi.resolveUnits(null,stack);
-        ServingProfile base=ServingProfile.resolve(food,quality,nutrients,sugar,alcohol,actualSpice/portions);
+        boolean canonicalInput=data.contains("nutrients")&&data.getString(VECTOR_TYPE).equals(CANONICAL_FIVE);
+        Map<String,Double> canonical=canonicalInput
+                ?new ServingVectors.CanonicalServing(nutrients).resolveNativeMirrors(sugar,alcohol).gains()
+                :new ServingVectors.SourceServing(nutrients).canonicalIngredient(sugar,alcohol).gains();
+        ServingProfile base=ServingProfile.resolve(food,quality,canonical,sugar,alcohol,actualSpice/portions);
         if(data.contains("hydration"))base=new ServingProfile(base.itemId(),quality,base.hunger(),base.saturationModifier(),base.baseNutrients(),base.nutrients(),
                 bounded(data.getDouble("hydration"),128)*metadataBasis,bounded(data.getDouble("quenching"),256)*metadataBasis,sugar,alcohol,actualSpice/portions);
         ServingProfile result=base.forPortions(portions);
@@ -134,22 +143,33 @@ public final class CookingRuntime {
             CompoundTag data=input.hasTag()?input.getTag().getCompound(SERVING):new CompoundTag();
             FoodProfile raw=profile(input);
             Map<String,Double> vector;
-            if(data.contains("nutrients")) vector=readVector(data.getCompound("nutrients"));
-            else if(raw!=null&&!raw.nutrients().isEmpty()) vector=ordinary(raw.nutrients());
+            boolean nativeCanonical=false;
+            if(data.contains("nutrients")) {
+                vector=readVector(data.getCompound("nutrients"));
+                nativeCanonical=data.getString(VECTOR_TYPE).equals(CANONICAL_FIVE);
+            } else if(raw!=null&&!raw.nutrients().isEmpty()) vector=ordinary(raw.nutrients());
             else if(player!=null&&input.isEdible()) {
+                nativeCanonical=true;
                 var potential=ConsumableProfiles.dietGains(player,input)
                         .orElseThrow(()->new IllegalStateException("Diet ingredient gains unavailable: "+input));
                 if(potential.containsKey("fats")) throw new IllegalStateException("Removed Diet Fats group in ingredient: "+input);
                 Map<String,Double> supported=new TreeMap<>();
-                for(String group:List.of("proteins","grains","fruits","vegetables","dairy"))
+                for(String group:List.of("proteins","carbs","spice","vegetables","alcohol"))
                     if(potential.containsKey(group))supported.put(group,potential.get(group));
                 vector=Map.copyOf(supported);
             } else vector=raw==null?Map.of():ordinary(raw.nutrients());
             double parts=portionCount(input),metadataParts=ediblePortions(input),vectorParts=data.contains("nutrients")?metadataParts:parts;
-            vector.forEach((group,value)->base.merge(group,value*vectorParts*input.getCount()/recipe.servings(),Double::sum));
             Map<String,Double> wholeVector=scaledVector(vector,vectorParts);
-            sugar+=(data.contains("sugar")?data.getDouble("sugar")*metadataParts:nativeSugar(input,raw,wholeVector))*input.getCount()/recipe.servings();
-            alcohol+=(data.contains("alcohol")?data.getDouble("alcohol")*metadataParts:nativeAlcohol(input,raw))*input.getCount()/recipe.servings();
+            double ingredientSugar=data.contains("sugar")?data.getDouble("sugar")*metadataParts:nativeSugar(input,raw,wholeVector);
+            double ingredientAlcohol=data.contains("alcohol")?data.getDouble("alcohol")*metadataParts:nativeAlcohol(input,raw);
+            // Deduplicate the sugar mirror WITHIN this paid ingredient before summing distinct
+            // flour/fruit/dairy contributions; no whole-map Carbs replacement after aggregation.
+            var canonicalIngredient=nativeCanonical
+                    ?new ServingVectors.CanonicalServing(wholeVector).resolveNativeMirrors(ingredientSugar,ingredientAlcohol)
+                    :new ServingVectors.SourceServing(wholeVector).canonicalIngredient(ingredientSugar,ingredientAlcohol);
+            canonicalIngredient.gains().forEach((group,value)->base.merge(group,value*input.getCount()/recipe.servings(),Double::sum));
+            sugar+=ingredientSugar*input.getCount()/recipe.servings();
+            alcohol+=ingredientAlcohol*input.getCount()/recipe.servings();
             spice+=SpiceApi.resolveUnits(null,input)*input.getCount()/recipe.servings();
             hydration+=(data.contains("hydration")?data.getDouble("hydration")*metadataParts:(raw==null?0:raw.hydration())*parts)*input.getCount()/recipe.servings();
             quenching+=(data.contains("quenching")?data.getDouble("quenching")*metadataParts:(raw==null?0:raw.quenching())*parts)*input.getCount()/recipe.servings();
@@ -161,7 +181,8 @@ public final class CookingRuntime {
             var evaluated=recipe.evaluateQuality(level,settled);
             quality=CuisineQuality.fromNative(evaluated.getId()); if(inherited!=null) quality=CuisineQuality.worst(quality,inherited);
         }
-        CompoundTag serving=new CompoundTag(); serving.put("nutrients",writeVector(base));serving.putDouble("sugar",sugar);serving.putDouble("alcohol",alcohol);serving.putDouble("spice",spice);
+        CompoundTag serving=new CompoundTag(); serving.put("nutrients",writeVector(base));serving.putString(VECTOR_TYPE,CANONICAL_FIVE);
+        serving.putDouble("sugar",sugar);serving.putDouble("alcohol",alcohol);serving.putDouble("spice",spice);
         // A direct authored composite hydration profile is an override, not an additional credit.
         serving.putDouble("hydration",profile.hydration());serving.putDouble("quenching",profile.quenching());
         if(!output.isEdible())serving.put(AGE_INPUTS,new ListTag());
@@ -185,22 +206,31 @@ public final class CookingRuntime {
                 if(!ResourceLocation.isValidResourceLocation(route)||!isPreparedFor(input,new ResourceLocation(route)))throw new IllegalArgumentException("Invalid committed preparation");
                 int portions=prep.getInt("servings");if(portions<1||portions>4096)throw new IllegalArgumentException("Invalid committed preparation yield");
                 ItemStack output=preparedOutput(input);CompoundTag data=output.hasTag()?output.getTag().getCompound(SERVING):new CompoundTag();
-                if(!data.contains("nutrients",Tag.TAG_COMPOUND))throw new IllegalArgumentException("Preparation lacks paid intake provenance");
+                if(!data.contains("nutrients",Tag.TAG_COMPOUND)||!data.getString(VECTOR_TYPE).equals(CANONICAL_FIVE))
+                    throw new IllegalArgumentException("Preparation lacks typed canonical paid intake provenance");
                 double units=(double)portions*input.getCount();
-                return new InputTotals(scaledVector(readVector(data.getCompound("nutrients")),units),
+                return new InputTotals(scaledVector(new ServingVectors.CanonicalServing(
+                        readVector(data.getCompound("nutrients"))).gains(),units),
                         bounded(data.getDouble("sugar"),1000)*units,bounded(data.getDouble("alcohol"),1000)*units,
                         bounded(data.getDouble("spice"),1000)*units,bounded(data.getDouble("hydration"),128)*units,
                         bounded(data.getDouble("quenching"),256)*units,true);
             }
             Optional<ServingProfile> serving=resolve(input);
             if(serving.isEmpty())return new InputTotals(Map.of(),0,0,0,0,0,false);
-            ServingProfile value=serving.get();double units=input.getCount();
+            ServingProfile value=serving.get();FoodProfile source=profile(input);
+            // A protected whole meal stores one PER-PORTION paid vector but represents
+            // source.servings() edible portions. Count the whole paid input before a cut
+            // or nested preparation allocates it across the actual output portions.
+            // Native-intake ingredients remain one whole item even when their catalogue
+            // row has a descriptive servings count.
+            double units=(double)input.getCount()*(source!=null&&source.quantityBasis().equals("per_portion")?source.servings():1);
             return new InputTotals(scaledVector(value.baseNutrients(),units),value.sugar()*units,value.alcohol()*units,
                     value.spice()*units,value.hydration()*units,value.quenching()*units,true);
         }
         private CompoundTag perPortion(double portions) {
             if(!Double.isFinite(portions)||portions<=0)throw new IllegalArgumentException("Invalid actual edible yield");
             CompoundTag data=new CompoundTag();data.put("nutrients",writeVector(scaledVector(nutrients,1D/portions)));
+            data.putString(VECTOR_TYPE,CANONICAL_FIVE);
             data.putDouble("sugar",bounded(sugar/portions,1000));data.putDouble("alcohol",bounded(alcohol/portions,1000));
             data.putDouble("spice",bounded(spice/portions,1000));data.putDouble("hydration",bounded(hydration/portions,128));
             data.putDouble("quenching",bounded(quenching/portions,256));return data;
@@ -314,7 +344,7 @@ public final class CookingRuntime {
         return output;
     }
     private static Map<String,Double> readVector(CompoundTag tag) { Map<String,Double> values=new TreeMap<>();for(String key:tag.getAllKeys()){
-        if(!Set.of("proteins","grains","fruits","vegetables","dairy").contains(key))
+        if(!Set.of("proteins","carbs","grains","fruits","vegetables","dairy","spice","alcohol").contains(key))
             throw new IllegalArgumentException("Unsupported Diet serving nutrient: "+key);
         values.put(key,bounded(tag.getDouble(key),100));
     }return values; }

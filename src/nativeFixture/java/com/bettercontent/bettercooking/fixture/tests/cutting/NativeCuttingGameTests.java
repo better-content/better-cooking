@@ -40,6 +40,10 @@ public final class NativeCuttingGameTests {
     public static void cancelled_real_spawn_retries_without_duplicate_prefix(GameTestHelper helper) { exercise(helper, false, true, false, false); }
     @GameTest(templateNamespace="better_cooking", template="native_discovery", batch="cutting_pie", timeoutTicks=100)
     public static void paid_pie_metadata_is_already_per_portion(GameTestHelper helper) { exercise(helper, false, false, true, false); }
+    @GameTest(templateNamespace="better_cooking", template="native_discovery", batch="cutting_canonical_pie", timeoutTicks=100)
+    public static void actual_canonical_paid_pie_cut_keeps_one_quality_scale(GameTestHelper helper) {
+        exercise(helper, false, false, true, false, false, false, false, true);
+    }
     @GameTest(templateNamespace="better_cooking", template="native_discovery", batch="cutting_seed", timeoutTicks=100)
     public static void actual_wild_tomato_seed_gate_and_ordered_chance(GameTestHelper helper) { exercise(helper, false, false, false, true); }
 
@@ -81,6 +85,9 @@ public final class NativeCuttingGameTests {
         exercise(helper, dispenser, cancelOne, pie, wild, false, false, false);
     }
     private static void exercise(GameTestHelper helper, boolean dispenser, boolean cancelOne, boolean pie, boolean wild, boolean destroyReady, boolean destroyAfterFailure, boolean vanillaRouter) {
+        exercise(helper, dispenser, cancelOne, pie, wild, destroyReady, destroyAfterFailure, vanillaRouter, false);
+    }
+    private static void exercise(GameTestHelper helper, boolean dispenser, boolean cancelOne, boolean pie, boolean wild, boolean destroyReady, boolean destroyAfterFailure, boolean vanillaRouter, boolean canonicalPie) {
         helper.assertTrue(!CookingMod.discoveryOnly(), "Cutting execution is not discovery-only acceptance");
         var level = helper.getLevel(); var manager = level.getRecipeManager();
         List<Recipe<?>> savedRecipes = new ArrayList<>(manager.getRecipes());
@@ -107,8 +114,11 @@ public final class NativeCuttingGameTests {
                 FoodThermalService.INSTANCE.state(input, FoodThermalService.Storage.AMBIENT, level.getGameTime()).putDouble("decay", .8);
             }
             if (pie) {
-                CompoundTag metadata = new CompoundTag(), nutrients = new CompoundTag(); nutrients.putDouble("grains", .08);
-                metadata.put("nutrients", nutrients); metadata.putDouble("sugar", .03); metadata.putDouble("alcohol", 0);
+                CompoundTag metadata = new CompoundTag(), nutrients = new CompoundTag();
+                nutrients.putDouble(canonicalPie ? "carbs" : "grains", .08);
+                metadata.put("nutrients", nutrients);
+                if (canonicalPie) metadata.putString(CookingRuntime.VECTOR_TYPE, CookingRuntime.CANONICAL_FIVE);
+                metadata.putDouble("sugar", .03); metadata.putDouble("alcohol", 0);
                 metadata.putDouble("spice", .02); metadata.putDouble("hydration", .01); metadata.putDouble("quenching", .01);
                 input.getOrCreateTag().put(CookingRuntime.SERVING, metadata);
                 helper.assertTrue(CookingRuntime.profile(input) != null && CookingRuntime.profile(input).protectedMeal(), "Actual pie policy must be resolved/protected before this control");
@@ -182,8 +192,16 @@ public final class NativeCuttingGameTests {
                 for (ItemStack output : delivered) if (output.is(edible)) {
                     helper.assertTrue(output.getTag().getInt(CookingRuntime.QUALITY) == 3, "Actual paid Poor quality retained without reroll");
                     helper.assertTrue(Math.abs(output.getTag().getCompound("better_industrial_heat_food").getDouble("decay") - .8) < .00001, "Oldest input clock retained on actual cut output");
-                    if (pie) helper.assertTrue(Math.abs(output.getTag().getCompound(CookingRuntime.SERVING).getCompound("nutrients").getDouble("grains") - .08) < .00001,
-                            "Pie per-portion metadata must not be divided by four again");
+                    if (pie) {
+                        CompoundTag portion=output.getTag().getCompound(CookingRuntime.SERVING);
+                        helper.assertTrue(portion.getString(CookingRuntime.VECTOR_TYPE).equals(CookingRuntime.CANONICAL_FIVE),
+                                "Native cut retains a typed canonical paid portion, never a second SOURCE projection");
+                        helper.assertTrue(Math.abs(portion.getCompound("nutrients").getDouble("carbs") - .08) < .00001,
+                                "Pie per-portion Carbs must not be divided by four or added to sugar again");
+                        var serving=CookingRuntime.resolve(output).orElseThrow();
+                        helper.assertTrue(Math.abs(serving.nutrients().get("carbs") - .08 * .75) < .00001,
+                                "Inherited Poor quality scales once at final serving, not each cut/reheat");
+                    }
                 }
             }
         } } finally { manager.replaceRecipes(savedRecipes); }

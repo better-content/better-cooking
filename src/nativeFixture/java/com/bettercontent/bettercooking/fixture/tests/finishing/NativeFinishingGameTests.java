@@ -65,6 +65,17 @@ public final class NativeFinishingGameTests {
         h.assertTrue(!expected.isEmpty()&&ItemStack.isSameItemSameTags(expected,actual)&&expected.getCount()==actual.getCount(),
             "real final output equals sole carry authority: portions, actual paid vector, inherited quality and existing Heat age");
         h.assertTrue(QualityUtils.getQuality(actual)==Quality.POOR,"late carry defeats native Standard overwrite without rerolling");
+        CompoundTag paid=actual.getTag().getCompound(CookingRuntime.SERVING);
+        h.assertTrue(paid.getString(CookingRuntime.VECTOR_TYPE).equals(CookingRuntime.CANONICAL_FIVE),
+                "Actual native finishing/reheat preserves typed canonical ingredient provenance");
+        var serving=CookingRuntime.resolve(actual).orElseThrow();
+        var quality=CookingRuntime.profile(actual).protectedMeal()?com.bettercontent.bettercooking.policy.CuisineQuality.POOR.multiplier():1;
+        for(var gain:serving.baseNutrients().entrySet()) {
+            h.assertTrue(com.bettercontent.bettersurvivalphysiology.nutrition.NativeDietRoster.GROUPS.contains(gain.getKey()),
+                    "Nested paid finish contains only native canonical groups");
+            h.assertTrue(Math.abs(serving.nutrients().get(gain.getKey()) - gain.getValue()*quality)<1.0e-8,
+                    "Actual final paid portion quality scales ONCE, including Carbs, after native reheating");
+        }
     }
     private static void checkFailure(GameTestHelper h,ItemStack batch,ItemStack actual,int units) {
         h.assertTrue(!actual.isEmpty()&&actual.getCount()==units,"exact native failure units preserved");

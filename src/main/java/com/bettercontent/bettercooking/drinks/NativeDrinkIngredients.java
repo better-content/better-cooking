@@ -1,6 +1,7 @@
 package com.bettercontent.bettercooking.drinks;
 
 import com.google.gson.*;
+import com.bettercontent.bettersurvivalphysiology.nutrition.ServingVectors;
 import net.minecraft.nbt.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,7 +14,8 @@ import java.util.*;
 /** Immutable facts captured at actual native insertion; finish never needs an online actor. */
 public final class NativeDrinkIngredients {
     public static final String KEY="better_cooking:native_drink_ingredients";
-    private static final Set<String> ORDINARY=Set.of("proteins","grains","fruits","vegetables","dairy");
+    private static final Set<String> ORDINARY=Set.of("proteins","grains","fruits","vegetables","dairy",
+            "sugars","sugar","carbs","spice","alcohol");
     private static final NativeDrinkFactBinding<CompoundTag> DEFAULTS=new NativeDrinkFactBinding<>();
     private NativeDrinkIngredients() {}
     public static boolean connected(LivingEntity actor){
@@ -101,7 +103,18 @@ public final class NativeDrinkIngredients {
             if(!intake.contains(field,Tag.TAG_DOUBLE))throw new IllegalArgumentException("Missing actual "+field);
             NativeDrinkCapture.checked(intake.getDouble(field));
         }
-        return NativeDrinkCapture.bounded(intake);
+        Map<String,Double> raw=new LinkedHashMap<>();
+        for(String key:nutrients.getAllKeys())raw.put(key,nutrients.getDouble(key));
+        double sugar=intake.getDouble("sugar"),alcohol=intake.getDouble("alcohol");
+        // Normalize ONE actual insertion before stockpot/teapot add() merges distinct inputs.
+        // Revalidated persisted canonical facts follow the canonical path, never SOURCE again.
+        var canonical=raw.containsKey("carbs")
+                ?new ServingVectors.CanonicalServing(raw).resolveNativeMirrors(sugar,alcohol)
+                :new ServingVectors.SourceServing(raw).canonicalIngredient(sugar,alcohol);
+        CompoundTag settled=intake.copy(),value=new CompoundTag();
+        canonical.gains().forEach(value::putDouble);
+        settled.put("nutrients",value);
+        return NativeDrinkCapture.bounded(settled);
     }
     /** Root MUST independently verify actual current provider/resource BYTES and raw snapshot bytes.
      * No auto-install. Domain excludes only approved self-derived outputs, NOT tags/server overrides.
