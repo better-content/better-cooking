@@ -25,7 +25,7 @@ import net.minecraft.core.Direction;
 
 public final class KitchenEvents {
     private static boolean registered;
-    public static void register() { if (!registered) { registered = true; MinecraftForge.EVENT_BUS.register(new KitchenEvents()); KitchenNetwork.register(); } }
+    public static void register() { if (!registered) { registered = true; MinecraftForge.EVENT_BUS.register(new KitchenEvents()); MinecraftForge.EVENT_BUS.register(new com.bettercontent.bettercooking.cutting.HandCutting()); KitchenNetwork.register(); } }
     private static boolean supported(BlockEntity be) {
         ResourceLocation id = ForgeRegistries.BLOCKS.getKey(be.getBlockState().getBlock());
         return id != null && (id.toString().equals("kaleidoscope_cookery:chopping_board") || id.getNamespace().equals("ubesdelight") && id.getPath().startsWith("baking_mat"));
