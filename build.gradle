@@ -102,6 +102,20 @@ dependencies {
     implementation fg.deobf(kaleidoscope)
     implementation fg.deobf(farmersDelight)
     implementation fg.deobf(ubesDelight)
+    // Source-built API classes take precedence over the previous runtime JAR's
+    // signatures; never package those classes inside Cooking's artifact.
+    def typedCore = providers.gradleProperty('typedProviderClasses').orNull
+    def typedWater = providers.gradleProperty('typedWaterCompileClasses').orNull
+    if (typedCore != null) {
+        if (!new File(file(typedCore), 'com/bettercontent/bettersurvivalphysiology/nutrition/CommittedDietIntake.class').isFile())
+            throw new GradleException('Missing source-built Physiology API classes')
+        compileOnly files(typedCore)
+    }
+    if (typedWater != null) {
+        if (!new File(file(typedWater), 'com/bettercontent/betterdrinkingwater/api/ServingHydration.class').isFile())
+            throw new GradleException('Missing source-built Water API classes')
+        compileOnly files(typedWater)
+    }
     compileOnly fg.deobf(physiology)
     compileOnly fg.deobf(water)
     compileOnly fg.deobf(heat)
@@ -110,8 +124,6 @@ dependencies {
     compileOnly fg.deobf(commerce)
     compileOnly fg.deobf(bumblezone)
     testRuntimeOnly fg.deobf(bumblezone)
-    def typed = providers.gradleProperty('typedProviderClasses').orNull
-    if (typed != null) { if (!file(typed).isDirectory()) throw new GradleException('Missing typedProviderClasses'); compileOnly files(typed) }
     compileOnly fg.deobf('curse.maven:diet-443570:4813904')
     compileOnly fg.deobf('curse.maven:thirst-679270:6660408')
     compileOnly fg.deobf('curse.maven:emi-580555:8081375')

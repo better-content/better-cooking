@@ -77,13 +77,41 @@ public final class CulinaryConsumption {
      * Finish or a verified placed-bite debit and reused by any duplicate callbacks. */
     public static boolean complete(ServerPlayer player,ItemStack capturedServing,Object committedUse) {
         if(player==null||player instanceof FakePlayer||player.connection==null||player.hasDisconnected()||!manages(capturedServing))return false;
+        // Resolve and validate ALL independent entitlements before claiming the actual
+        // callback identity or writing the persistent completion sequence. A rejected
+        // profile must not swallow a retry or partially award Diet/Thirst/health.
+        var nutrition=CulinaryNutritionApi.resolve(player,capturedServing);
+        var hydration=ServingHydration.resolve(player,capturedServing);
+        double paidSpice=spiceManages(capturedServing)?SpiceApi.resolveUnits(player,capturedServing):0;
+        if(!Double.isFinite(paidSpice)||paidSpice<0||paidSpice>10000)
+            throw new IllegalArgumentException("Invalid paid Spice completion dose");
+        if(nutrition.isPresent()) {
+            var diet=com.bettercontent.bettersurvivalphysiology.nutrition.DietBridge.tracker(player)
+                    .orElseThrow(()->new IllegalStateException("Missing paid culinary Diet tracker"));
+            var gains=nutrition.get().adjusted().gains();
+            if(!diet.getValues().keySet().containsAll(gains.keySet())
+                    ||paidSpice>0&&!diet.getValues().containsKey("spice"))
+                throw new IllegalStateException("Diet suite has no paid culinary nutrient");
+            new com.bettercontent.bettersurvivalphysiology.nutrition.CommittedDietIntake.Portion(
+                    nutrition.get().adjusted(),paidSpice);
+        }
         long previous=player.getPersistentData().getLong(SEQUENCE);
         if(previous<0||previous==Long.MAX_VALUE)throw new IllegalStateException("Invalid culinary completion sequence");
+        long sequence=previous+1;
+        if(hydration.isPresent()) {
+            var waterNext=ServingHydration.nextFoodSequence(player);
+            if(waterNext.isEmpty())return false; // No Thirst ledger: do not consume the callback.
+            sequence=Math.max(sequence,waterNext.getAsLong());
+        }
         if(!COMMITTED.computeIfAbsent(player.getUUID(), ignored->new CompletionTokenLedger()).claim(committedUse))return false;
-        long sequence=previous+1;player.getPersistentData().putLong(SEQUENCE,sequence);
-        CulinaryNutritionApi.complete(player,capturedServing);
-        ServingHydration.completeFood(player,sequence,capturedServing);
-        if(spiceManages(capturedServing))SpiceRuntime.applyCompletedUnits(player,SpiceApi.resolveUnits(player,capturedServing));
+        player.getPersistentData().putLong(SEQUENCE,sequence);
+        if(nutrition.isPresent())
+            com.bettercontent.bettersurvivalphysiology.nutrition.CommittedDietIntake.commit(player,capturedServing,
+                    new com.bettercontent.bettersurvivalphysiology.nutrition.CommittedDietIntake.Portion(
+                            nutrition.get().adjusted(),paidSpice),true);
+        if(hydration.isPresent()&&!ServingHydration.completeFood(player,sequence,hydration.get()))
+            throw new IllegalStateException("Previously validated paid food hydration was rejected");
+        if(paidSpice>0)SpiceRuntime.applyCompletedUnits(player,paidSpice);
         return true;
     }
     private static void loggedOut(PlayerEvent.PlayerLoggedOutEvent event) { COMMITTED.remove(event.getEntity().getUUID()); }
